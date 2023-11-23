@@ -1,0 +1,410 @@
+/**
+ #Import styles
+*/
+
+@import url(./variables.css);
+@import url(./animations.css);
+@import url(https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap);
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--normal-color);
+  border-radius: 3rem;
+  border: 3px solid var(--card-color);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary-bg-color);
+}
+/**
+ #General styles
+*/
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  font-family: "Rubik", sans-serif;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--accent-color);
+  line-height: 1;
+  height: 100vh;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+button {
+  border: none;
+  color: var(--accent-color);
+  background: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.8;
+}
+
+img {
+  width: 100%;
+  object-fit: fit;
+  /* background: url(../../public/images/backdrop.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; */
+}
+
+main {
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.container {
+  width: var(--desktop-container);
+  margin: 0 auto;
+}
+
+.gradient-overlay {
+  width: 100%;
+  border-radius: var(--border-radius);
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.9));
+}
+/* ------------ */
+
+input {
+  border: none;
+  background: none;
+  color: var(--accent-color);
+}
+
+input:focus {
+  outline: none;
+}
+
+.dark-gradient-overlay {
+  width: 100%;
+  height: 100%;
+  background: var(--darkGradientOverlay);
+}
+
+
+/**
+ #Swiper styles
+*/
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.swiper-slide {
+  height: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.swiper-scrollbar-drag {
+  background: var(--line-color);
+}
+
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+  display: none;
+
+}
+
+/**
+ #text sizes styles
+*/
+
+h1 {
+  font-size: clamp(2rem, 3vw, 2.2rem);
+  color: var(--white-color);
+  font-weight: 900;
+}
+h2 {
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
+  color: var(--accent-color);
+  font-weight: 800;
+}
+h3 {
+  font-size: clamp(1.3rem, 1.3vw, 1.9rem);
+  color: var(--accent-color);
+  font-weight: 700;
+}
+h4 {
+  font-size: clamp(1rem, 1.1vw, 1.3rem);
+  color: var(--text-color);
+  font-weight: 600;
+}
+h5 {
+  font-size: clamp(0.8rem, 1.1vw, 1.1rem);
+  color: var(--sub-text-color);
+  font-weight: 600;
+}
+h6 {
+  font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+  color: var(--sub-text-color);
+  font-weight: 500;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--accent-color);
+  line-height: 1.1;
+  margin: 0;
+}
+hr {
+  height: 2px;
+  background-color: var(--line-color);
+  border: none;
+}
+li {
+  list-style: none;
+}
+
+.inactive {
+  opacity: 0.6;
+}
+/* #MovieMain {
+ margin-top: var(--header-height;
+} */
+
+progress {
+  appearance: none;
+}
+::-webkit-progress-bar,
+::-moz-progress-bar {
+  border: none;
+  background-color: var(--secondary-bg-color);
+}
+/**
+ #Icon styles
+*/
+
+.small-icon {
+  font-size: var(--small-icon);
+  color: var(--text-color);
+}
+.medium-icon {
+  font-size: var(--medium-icon);
+  color: var(--text-color);
+}
+.normal-icon {
+  font-size: var(--normal-icon);
+  color: var(--text-color);
+}
+.large-icon {
+  font-size: var(--big-icon);
+  color: var(--text-color);
+}
+/**
+ #Text styles and color
+*/
+
+.single-line-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.double-line-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sub-text {
+  color: var(--sub-text-color);
+  font-weight: 400;
+}
+.normal-text {
+  color: var(--text-color);
+  font-weight: 400;
+}
+.small-font-size {
+  font-size: var(--small-font-size);
+}
+.medium-font-size {
+  font-size: var(--medium-font-size);
+}
+.large-font-size {
+  font-size: var(--large-font-size);
+}
+
+.warning-text {
+  color: rgb(255, 217, 0);
+}
+.blue-text {
+  color: rgb(0, 132, 255);
+}
+
+.underlined-text {
+  position: relative;
+  display: flex;
+  width: min-content;
+}
+.underlined-text::after {
+  content: '';
+  height: 4px;
+  background: var(--primary-color);
+  position: absolute;
+  width: 100%;
+  bottom: -4px;
+  z-index: -1;
+  border-radius: var(--border-radius);
+}
+/**
+ #Button styles
+*/
+
+.btn {
+  transition: all 0.3s;
+  padding: var(--button-padding);
+  border-radius: var(--button-radius);
+  background-color: var(--primary-color);
+}
+.btn:hover,
+.secondary-btn:hover,
+.relative-btn:hover {
+  scale: 1.01;
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  display: inline-block;
+  transition: all 0.3s;
+  background: transparent;
+  color: var(--accent-color);
+  padding: var(--padding);
+  border-radius: var(--button-radius);
+  border: solid 1.5px var(--line-color);
+}
+
+.secondary-btn:hover {
+  color: white;
+}
+
+.relative-btn {
+  transition: all 0.3s;
+  padding: var(--button-padding);
+  border-radius: var(--button-radius);
+  background-color: var(--card-color);
+}
+
+.relative-btn:hover > * {
+  color: var(--normal-color);
+}
+
+.close-btn {
+  background: var(--bg-color);
+  padding: 5px;
+  border-radius: var(--button-radius);
+  width: clamp();
+  height: unset;
+  transition: all 0.2s;
+}
+.close-btn:hover {
+  background: var(--primary-color);
+}
+
+.flex-outlined-btn {
+  display: flex;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 1rem;
+  background: var(--background-color);
+  align-items: center;
+  gap: 8px;
+  border-radius: 1rem;
+  border: solid 1px var(--line-color);
+}
+/**
+ #Blur
+*/
+
+.blur-bg {
+  backdrop-filter: blur(10px);
+}
+/**
+ #Loading and Splash screen
+*/
+
+#splashScreen,
+#loading {
+  z-index: 100;
+  background: var(--bg-color);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+}
+#splashScreen {
+  display: flex;
+}
+
+#splashScreen img {
+  width: 150px;
+  object-fit: contain;
+  animation: loadingAnimation 2s ease-in 1s infinite;
+  transform: translateY(-30px);
+  opacity: 1;
+  display: flex;
+  transition: opacity 1s, display 1s;
+}
+#loading {
+  display: none;
+  align-items: center;
+  background-color: var(--light-dark-bg-color);
+}
+/* This style of block is not necessary
+When working in react */
+#splashScreen.stop {
+  opacity: 0;
+  display: none;
+}
+#loading.active {
+  display: flex;
+}
+.mobile-props {
+  display: none;
+}
+.desktop-props {
+  display: flex;
+}
+@media screen and (max-width: 860px) {
+  .mobile-props {
+    display: flex;
+  }
+  .desktop-props {
+    display: none;
+  }
+}

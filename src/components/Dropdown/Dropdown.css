@@ -1,0 +1,59 @@
+@import url(../../styles/variables.css);
+
+.dropdown-bg,
+button.flex-outlined-btn {
+  position: relative;
+  display: flex;
+  margin: 0;
+}
+.dropdown-bg{
+  margin: .5rem 1rem;
+}
+
+
+.dropdown {
+  position: absolute;
+  background: var(--secondary-bg-color);
+  padding: var(--button-padding);
+  left: auto;
+  right: auto;
+  border-radius: var(--button-radius);
+  width: initial;
+  height: 0;
+  transform: translateY(40px);
+  /* overflow: hidden; */
+  visibility: hidden;
+  transition: height .5s;
+  z-index: 4;
+  opacity: 0;
+}
+.dropdown.active {
+  height: initial;
+  visibility: visible;
+  animation: unwrapHeight .5s;
+  opacity: 1;
+}
+
+@keyframes unwrapHeight {
+  0%{
+    height: 0;
+  }
+  100% {
+    height: initial;
+  }
+}
+
+.dropdown-list-item {
+  padding: var(--button-padding);
+  border-radius: var(--button-padding);
+  cursor: pointer;
+  
+}
+/* .dropdown-list-item h4 {
+} */
+.dropdown-list-item h4.active {
+  color: var(--normal-color);
+}
+.dropdown-list-item:hover {
+  background: var(--card-color);
+}

@@ -1,0 +1,6 @@
+/* @import url(./styles/general.css); */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Rubik', sans-serif;
+}

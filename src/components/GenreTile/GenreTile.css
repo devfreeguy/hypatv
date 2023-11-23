@@ -1,0 +1,30 @@
+@import url(../../styles/variables.css);
+
+.genre-bg, .genre-tile {
+  width: 100%;
+  margin: 0 5px;
+}
+
+.genre-tile {
+  display: flex;
+  background: var(--bg-color);
+  padding: 1rem;
+  gap: var(--small-gap);
+  align-items: center;
+  border-radius: var(--button-radius);
+  border: solid 1px var(--line-color)
+}
+.genre-tile.small {
+  padding: .5rem .7rem;
+}
+
+.genre-tile:hover {
+  background: var(--secondary-bg-color)
+}
+
+.genre-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+}

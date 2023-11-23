@@ -1,0 +1,88 @@
+@import url(./variables.css);
+
+#auth-section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+#auth-card-bg {
+  width: 100%;
+  max-width: 350px;
+  /* height: 100%; */
+  max-height: 80vh;
+  min-height: 400px;
+  background: var(--secondary-bg-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  padding: 3rem 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* #auth-warning-bg {
+  display: flex;
+  gap: var(--small-gap);
+  background: var(--bg-color);
+  padding: var(--mini-padding);
+  border-radius: var(--button-radius);
+  width: 100%;
+  margin: 0 2rem;
+} */
+
+#auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: calc(var(--small-gap) * 2);
+  /* transition: all 1s; */
+}
+
+.auth-or-text {
+  width: 100%;
+  text-align: center;
+  margin-top: .3rem;
+}
+
+.auth-input-feilds {
+  display: flex;
+  gap: var(--small-gap);
+  width: 100%;
+  align-items: center;
+  
+}
+
+.auth-inputs{
+  padding: var(--mini-padding);
+  flex: 1;
+}
+
+/* #auth-btn h4 {
+  padding: var(--mini-padding); 
+} */
+
+#auth-forgot {
+  align-self: flex-end;
+}
+#auth-forgot > * {
+  color: var(--normal-color);
+  padding: 0 .4rem;
+  cursor: pointer;
+}
+
+#auth-action-btns {
+  padding: var(--small-gap) 1rem;
+  width: 100%;
+  display: flex;
+  gap: var(--small-gap);
+}
+
+#switch-btn {
+  margin-left: auto;
+}

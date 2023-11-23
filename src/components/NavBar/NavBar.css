@@ -1,0 +1,157 @@
+@import url(../../styles/variables.css);
+
+nav {
+  display: flex;
+}
+
+#nav-list {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+
+#nav-tile {
+  display: flex;
+  padding: 0.5rem 0.8rem;
+  background: transparent;
+  align-items: center;
+  border-radius: 0.6rem;
+  gap: 8px;
+  transition: all 500ms;
+  margin: 0 0.3rem;
+  cursor: pointer;
+}
+
+#nav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+span#nav-tile {
+  position: relative;
+}
+
+#nav-icon {
+  display: none;
+}
+
+#nav-tile h4 {
+  display: flex;
+  flex: 1;
+}
+
+#nav-tile * {
+  color: var(--text-color);
+}
+
+#nav-tile:hover {
+  background: var(--card-color);
+}
+
+#nav-tile.active {
+  background: var(--primary-color);
+}
+
+#nav-tile.active * {
+  color: white;
+}
+
+#nav-category {
+  display: none;
+  flex-direction: column;
+  width: 250px;
+  border-radius: 0.5rem;
+  position: absolute;
+  left: auto;
+  right: auto;
+  top: 60px;
+}
+
+#nav-category.active {
+  display: flex;
+}
+
+@media screen and (max-width: 860px) {
+  nav {
+    overflow: hidden;
+    z-index: -1;
+    width: 0;
+  }
+
+  nav.close {
+    position: fixed;
+    height: 100vh;
+    animation: slideNavIn 0.3s;
+    width: 0px;
+    background: var(--light-dark-bg-color);
+  }
+  
+
+  nav.open {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    animation: slideNavOut 0.5s;
+    background: var(--light-dark-bg-color);
+  }
+  
+
+  @keyframes slideNavOut {
+    0% {
+      width: 0px;
+    }
+    100% {
+      width: 100vw;
+    }
+  }
+
+  @keyframes slideNavIn {
+    0% {
+      width: 100vw;
+    }
+    100% {
+      width: 0px;
+      display: none;
+    }
+  }
+
+  #nav-list {
+    display: flex;
+    flex-direction: column;
+    background: var(--secondary-bg-color);
+    height: 100%;
+    width: 40vw;
+    /* padding: var(--padding); */
+    justify-content: flex-start;
+    gap: var(--small-gap);
+    min-width: 250px;
+    max-width: 300px;
+    margin: 0;
+    padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  .nav-item {
+    display: flex;
+    width: 100%;
+
+    flex-direction: column;
+  }
+
+  #nav-tile {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    margin: 0.2rem 0;
+    /* margin: .5rem; */
+  }
+
+  #nav-icon {
+    display: block;
+  }
+
+  #nav-category {
+    padding: var(--padding);
+    position: static;
+    width: 100%;
+  }
+}

@@ -1,0 +1,55 @@
+@import url(../../styles/variables.css);
+@import url(../../styles/general.css);
+
+header {
+  display: flex;
+  height: var(--header-height);
+  width: 100vw;
+  position: fixed;
+  z-index: 89;
+  transition: background .1s;
+}
+header.shrink {
+  background-color: var(--bg-color);
+}
+
+#container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+header div {
+  display: flex;
+  align-items: center; 
+  gap: var(--small-gap);
+}
+
+#HeaderAction, .header-action-box {
+  gap: calc(var(--small-gap) * 3);
+}
+
+#header-logo {
+  width: calc(var(--header-logo-width) * 1.1);
+  margin: 0;
+  object-fit: contain;
+}
+
+#profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: clamp(2rem, 5vw, 2.5rem);
+  width: clamp(2rem, 5vw, 2.5rem);
+  object-fit: cover;
+  border-radius: 1000px;
+  background: var(--secondary-bg-color);
+  transition: all 200ms;
+}
+
+#profile:hover {
+  scale: 1.05;
+  /* border: solid 2px var(--primary-color); */
+}

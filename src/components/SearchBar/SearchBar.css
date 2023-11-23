@@ -1,0 +1,22 @@
+@import url(../../styles/variables.css);
+
+/* .search-box {
+  display: flex;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 1rem;
+  background: var(--background-color);
+  align-items: center;
+  gap: 8px;
+  border-radius: 1rem;
+  border: solid 1px var(--line-color);
+} */
+
+.search-bar {
+  width: clamp(7rem, 15vw, 10rem);
+  border: none;
+}
+
+.search-box  form{
+  display: flex;
+  gap: var(--small-gap);
+}

@@ -1,0 +1,118 @@
+@import url(../../styles/variables.css);
+
+#hero-slider-bg {
+  width: 100vw;
+  height: 110vh;
+  position: relative;
+  max-height: 650px;
+}
+#hero-slider-bg img.hero-slider-img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
+#hero-slider-bg .hero-overlay {
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: linear-gradient(
+    to bottom,
+    var(--light-dark-bg-color),
+    var(--bg-color)
+  );
+}
+#hero-slider-welcome,
+#hero-slider-main {
+  width: 100%;
+  padding-top: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.hero-welcome-side {
+  width: 38%;
+  height: 100%;
+  margin: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-side-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 2rem;
+}
+
+#hero-main-details {
+  width: 30vw;
+  margin-left: 2rem;
+}
+
+.hero-side-details h1,
+.hero-side-details h3,
+.hero-buttons {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.hero-side-details h1 {
+  transition-delay: 0.3s, 0.3s;
+}
+.hero-side-details h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition-delay: 0.6s, 0.6s;
+}
+.hero-buttons {
+  transition-delay: 0.9s, 0.9s;
+}
+.hero-side-details h1.active,
+.hero-side-details h3.active,
+.hero-buttons.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#hero-welcome-buttons button {
+  width: 30%;
+}
+
+@media screen and (max-width: 1024px) {
+  #hero-slider-welcome {
+    flex-direction: column;
+  }
+
+  .hero-welcome-side {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #hero-welcome-details {
+    text-align: center;
+  }
+  #hero-main-details {
+    text-align: none;
+  }
+  #hero-welcome-buttons {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #hero-main-poster {
+    display: none;
+  }
+}
