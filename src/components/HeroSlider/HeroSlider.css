@@ -32,7 +32,6 @@
   align-items: center;
 }
 
-
 .hero-welcome-side {
   width: 38%;
   height: 100%;
@@ -83,6 +82,7 @@
 .hero-buttons {
   display: flex;
   gap: 10px;
+  justify-content: center;
 }
 
 #hero-welcome-buttons button {
@@ -115,4 +115,32 @@
   #hero-main-poster {
     display: none;
   }
+
+  .hero-main-side {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-overlay {
+    align-items: flex-end;
+  }
+
+  .hero-buttons.active {
+    /* width: 100%; */
+  }
+
+  #hero-main-details {
+    width: 100%;
+    margin-bottom: 5rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .hero-main-side {
+    width: 80%;
+  }
+
 }

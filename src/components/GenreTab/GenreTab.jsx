@@ -27,6 +27,7 @@ const GenreTab = ({ direction }) => {
             to="movie"
             data={genre}
             size={direction === "vertical" ? "normal" : "small"}
+            key={genre.id}
           />
         );
       })}

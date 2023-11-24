@@ -1,0 +1,47 @@
+@import url(../../styles/variables.css);
+
+.season-card-bg {
+  padding: var(--padding);
+  background: var(--secondary-bg-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: flex-end;
+  gap: calc(var(--small-gap) * 2);
+  max-width: 400px;
+}
+.season-card-bg:hover .season-card-img {
+  scale: 1.05;
+}
+
+.season-card-img {
+  width: 150px;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  transition: scale .5s;
+}
+
+.season-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+  padding-bottom: var(--small-gap);
+
+}
+
+.season-card-overview {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.season-card-episode-btn {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.season-card-episode-count {
+  flex: 1;
+}

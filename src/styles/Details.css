@@ -3,20 +3,32 @@
 #details-section {
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+#details-hero-image {
+  width: 100vw;
+  object-fit: cover;
+  display: flex;
+  position: relative;
+}
+
+#details-bg {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+}
+
+#details-main {
+  width: 100%;
 }
 
 #details-hero-bg {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  position: relative;
-  overflow: hidden;
-}
-
-#details-hero-image {
   width: 100%;
-  object-fit: cover;
-  display: flex;
+  overflow: hidden;
+  padding-top: var(--header-height);
 }
 
 #details-hero-data-bg {
@@ -32,9 +44,12 @@
   display: flex;
   max-height: 70vh;
   border-radius: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 #details-hero-poster {
+  width: 200px;
   height: 60%;
   aspect-ratio: 2/3;
 }
@@ -51,7 +66,31 @@
   display: flex;
   align-items: center;
   gap: calc(var(--small-gap) * 3);
-  width: 60%;
+  width: 80%;
+  justify-content: center;
+  flex-grow: 1;
+  margin-top: calc((var(--header-height) / 2) + 1rem);
+
+}
+
+#details-others {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  margin: 1rem;
+  margin-top: var(--header-height);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: var(--button-padding);
+  height: auto;
+  gap: var(--small-gap);
+}
+
+.details-top-credit{
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
 }
 
 #details-hero-data-info {
@@ -86,8 +125,11 @@
 #details-main-bg {
   padding: var(--padding);
   display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 1rem 2rem;
+  gap: calc(var(--small-gap) * 4);
+  height: auto;
 }
 
 
@@ -97,20 +139,21 @@
   gap: calc(var(--small-gap) * 2);
 }
 
-#details-main-summary h3 {
-  width: auto;
+/*  */
+
+#details-main h4 {
   color: var(--text-color);
 }
+#details-main h3 {
+  color: var(--accent-color);
+}
 
+.datails-container {
+  width: 100%;
+}
 
-
-
-#details-reviews {
+#casts-container {
   display: flex;
-  flex-direction: column;
-  width: 700px;
-  margin: 0 1rem;
-  background: var(--secondary-bg-color);
-  border-radius: var(--border-radius);
-  padding: var(--padding);
+  width: 100%;
+  padding: 2rem 0 1rem 0;
 }

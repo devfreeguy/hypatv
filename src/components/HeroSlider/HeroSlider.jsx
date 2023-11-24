@@ -11,7 +11,7 @@ import "swiper/css";
 const HeroSlider = () => {
   const navigate = useNavigate();
   const [animateIn, setAnimateIn] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [heroMovies, setHeroMovie] = useState([]);
   const [welcomeMovies, setWelcomeMovie] = useState([]);
 
@@ -43,9 +43,9 @@ const HeroSlider = () => {
     // getTvSeries();
   }, []);
 
-  const goToDetails = (id) => {
-    navigate(`/movie/${id}`);
-  };
+  // const goToDetails = (id) => {
+  //   navigate(`/movie/${id}`);
+  // };
 
   const animate = () => {
     setAnimateIn(true);
@@ -70,18 +70,13 @@ const HeroSlider = () => {
           navigation={false}
           modules={[Autoplay, Pagination, Navigation]}
           onSlideChange={() => animate}
-          onSwiper={(swiper) => {
-          }}
+          onSwiper={(swiper) => {}}
         >
           {heroMovies.map((movie) => {
             try {
               return (
                 <SwiperSlide key={movie.id}>
-                  <HeroSlide
-                    data={movie}
-                    animateIn={animateIn}
-                    goTo={goToDetails(movie.id)}
-                  />
+                  <HeroSlide data={movie} animateIn={animateIn} />
                 </SwiperSlide>
               );
             } catch (error) {
@@ -126,7 +121,10 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-              <div className="hero-welcome-side">
+              <div
+                className="hero-welcome-side"
+                onClick={() => navigate("login")}
+              >
                 {welcomeMovies.map((series, i) => {
                   if (i === 1) {
                     return (
@@ -157,7 +155,14 @@ const HeroSlider = () => {
   );
 };
 
-const HeroSlide = ({ data, animateIn, goTo }) => {
+const HeroSlide = ({ data, animateIn }) => {
+  const navigate = useNavigate();
+
+  const goToDetails = (id) => {
+    console.log("going");
+    navigate(`/movie/${id}`);
+  };
+
   return (
     <div id="hero-slider-bg">
       <img
@@ -178,7 +183,12 @@ const HeroSlide = ({ data, animateIn, goTo }) => {
                 {data.overview}
               </h3>
               <div className={`hero-buttons ${animateIn ? "active" : ""}`}>
-                <button className="btn" onClick={goTo}>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    goToDetails(data.id);
+                  }}
+                >
                   <h4>Watch now</h4>
                 </button>
                 <button className="relative-btn">

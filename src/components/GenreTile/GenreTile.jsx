@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import getGenreImage from "../../config/getGenreImage";
-import "./GenreTile.css"
-
+import "./GenreTile.css";
+import apiConfig from "../../config/apiconfg";
 
 const GenreTile = (props) => {
-  const data = props.data;
-
   const navigate = useNavigate();
-  const imageUrl = getGenreImage(data?.name);
-  // console.log(imageUrl);
+  
+  const data = props.data;
+  const imageUrl =
+    props?.custom_image !== null
+      ? apiConfig.w500Image(props?.custom_image)
+      : getGenreImage(data && data?.name);
 
   return (
     <div className="genre-bg">
@@ -19,7 +21,9 @@ const GenreTile = (props) => {
         }}
       >
         <img src={imageUrl} className="genre-icon" />
-        <h4 className="genre-name single-line-text">{data?.name}</h4>
+        <h4 className="genre-name single-line-text">
+          {props.custom_name ? props.custom_name : data?.name}
+        </h4>
       </div>
     </div>
   );

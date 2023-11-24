@@ -35,7 +35,7 @@ const tmdbAPI = {
     return axiosClient.get(url, {params: {}});
   },
   getVideos: (category, id) => {
-    const url = type[category] + 'tv/' + id + "/videos";
+    const url = type[category] + "/" + id + "/videos";
     return axiosClient.get(url, {params: {}});
   },
   search: (category, params) => {

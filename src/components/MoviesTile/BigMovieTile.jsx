@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./MoviesTile.css";
-import apiConfig from "../../config/apiconfg";
+import apiConfig from "../../config/apiconfg"
+import placeholder from "/images/backdrop.jpg";
 
 const BigMovieTile = ({ size, data }) => {
-  const [image, setImage] = useState("./images/backdrop.jpg");
+  const [image, setImage] = useState();
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const BigMovieTile = ({ size, data }) => {
       <div id="big-movie-tile">
         <div id="movie-tile-main">
           <img
-            src={apiConfig.w500Image(image)}
+            src={image ? apiConfig.w500Image(image) : placeholder}
             id="big-movie-tile-image"
             className={`${size} ${isActive ? "active" : ""}`}
           />
