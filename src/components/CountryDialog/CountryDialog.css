@@ -1,0 +1,40 @@
+@import url(../../styles/variables.css);
+
+.country-dialog-bg {
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+}
+
+.country-dialog-form,
+.country-dialog-tile {
+  display: flex;
+  align-items: center;
+  gap: var(--small-gap);
+}
+
+#country-dialog-searcher {
+  flex: 1;
+}
+
+.country-dialog-card {
+  display: flex;
+  flex-direction: column;
+  max-height: 250px;
+  overflow-y: scroll;
+  gap: var(--small-gap);
+  padding: 0 0.5rem;
+  transition: all .3s;
+}
+
+.country-dialog-tile{
+  cursor: pointer;
+}
+
+.country-dialog-tile-flag {
+  display: flex;
+  height: 20px;
+  width: 30px;
+  object-fit: cover;
+  border-radius: .2rem;
+}

@@ -11,7 +11,7 @@ import "swiper/css";
 const HeroSlider = () => {
   const navigate = useNavigate();
   const [animateIn, setAnimateIn] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [heroMovies, setHeroMovie] = useState([]);
   const [welcomeMovies, setWelcomeMovie] = useState([]);
 
@@ -30,17 +30,8 @@ const HeroSlider = () => {
     };
     getMovies();
 
-    // const getTvSeries = async () => {
-    //   const params = { page: 1 };
-    //   try {
-    //     const response = await tmdbAPI.getTvList(tvType.popular, {
-    //       params,
-    //     });
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // };
-    // getTvSeries();
+    const jhwviibibciussicvkv = sessionStorage.getItem("jhwviibibciussicvkv");
+    jhwviibibciussicvkv ? setIsLoggedIn(true) : setIsLoggedIn(false)
   }, []);
 
   // const goToDetails = (id) => {
@@ -69,8 +60,8 @@ const HeroSlider = () => {
           pagination={false}
           navigation={false}
           modules={[Autoplay, Pagination, Navigation]}
-          onSlideChange={() => animate}
-          onSwiper={(swiper) => {}}
+          onSlideChange={() => animate()}
+          onSwiper={(swiper) => animate()}
         >
           {heroMovies.map((movie) => {
             try {
@@ -160,7 +151,7 @@ const HeroSlide = ({ data, animateIn }) => {
 
   const goToDetails = (id) => {
     console.log("going");
-    navigate(`/movie/${id}`);
+    navigate(`/movie/details/${id}`);
   };
 
   return (

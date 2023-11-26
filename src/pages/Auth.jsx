@@ -1,40 +1,109 @@
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Auth.css";
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { signin, signup } from "../config/firebaseConfig";
+import CustomAlerts from "../components/CustomAlert/CustomAlerts";
+import Loading from "../components/Loading";
+import ProfileInfo from "../components/ProfileInfo/ProfileInfo";
 
 const Auth = () => {
-
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
+  const navigate = useNavigate()
+  // const formRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const [moreInfo, setMoreInfo] = useState(true);
   const [mode, setMode] = useState("login");
+  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [cpassword, setCpassword] = useState("");
 
-  useEffect(()=>{
-    console.log(pathname);
+  useEffect(() => {
     pathname === "/signup" ? setMode("signup") : setMode("login");
-  },[])
+  }, []);
+
+  useEffect(() => {}, [error]);
 
   const switchMode = () => {
     mode === "signup" ? setMode("login") : setMode("signup");
   };
 
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      event.preventDefault();
+    } catch {
+      Event.preventDefault();
+    }
+    if (mode === "signup") {
+      if (email && password && cpassword) {
+        if (password === cpassword) {
+          setLoading(true);
+          await signup(email, password, (success, message) => {
+            setLoading(false);
+            // Do something on
+            if (success) {
+              alert("Signup successful");
+            } else {
+              console.log(message);
+            }
+          });
+        } else {
+          setError("Passwords does not match!");
+        }
+      } else {
+        setError("All fields are requred!");
+      }
+    } else {
+      if (email && password) {
+        setLoading(true);
+        await signin(email, password, (success, message) => {
+          // Do something on
+          setLoading(false);
+          if (success) {
+            navigate('/')
+          } else {
+            console.log(message);
+          }
+        });
+      } else {
+        setLoading(false);
+        setError("All fields are requred!");
+      }
+    }
+  };
+
   return (
     <section id="auth-section">
-      <div id="auth-card-bg">
+      {loading && <Loading />}
+      {moreInfo && <ProfileInfo />}
+      {error && (
+        <CustomAlerts
+          title="An error occured"
+          message={error}
+          button={{
+            positive: {
+              text: "close",
+              perform: () => {
+                setError("");
+              },
+            },
+          }}
+        />
+      )}
+      <div id="auth-card-bg" className="dialog-card">
         <h1 id="auth-top-text">
           {mode === "signup" ? "Hey, Welcome" : "Welcome back"}
         </h1>
         <p id="auth-sub-text" className="sub-text">
           Please fill in required data
         </p>
-        <form id="auth-form">
-          {/* <span id="auth-warning-bg">
-          <i className="fa-duotone fa-warning small-icon warning-text"></i>
-          <h5 id="auth-warning-text" className="warning-text">
-            Warning
-          </h5>
-        </span> */}
-
-          {mode === "signup" && (
+        <form className="dialog-form">
+          {/* {mode === "signup" && (
             <label htmlFor="auth-username">
               <span className="auth-input-feilds secondary-btn">
                 <i className="fa-duotone fa-user normal-icon"></i>
@@ -46,16 +115,20 @@ const Auth = () => {
                 />
               </span>
             </label>
-          )}
+          )} */}
 
           <label htmlFor="auth-email">
             <span className="auth-input-feilds secondary-btn">
               <i className="fa-duotone fa-envelope normal-icon"></i>
               <input
                 type="email"
+                value={email}
                 id="auth-email"
                 placeholder="Email address"
                 className="auth-inputs"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
             </span>
           </label>
@@ -64,12 +137,23 @@ const Auth = () => {
             <span className="auth-input-feilds secondary-btn">
               <i className="fa-duotone fa-unlock normal-icon"></i>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
                 id="auth-password"
                 placeholder="Password"
                 className="auth-inputs"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
-              <i className="fa-solid fa-eye small-icon"></i>
+              <i
+                className={`fa-solid fa-${
+                  showPassword ? "eye-slash" : "eye"
+                } small-icon`}
+                onClick={() => {
+                  togglePassword();
+                }}
+              ></i>
             </span>
           </label>
 
@@ -85,16 +169,24 @@ const Auth = () => {
               <span className="auth-input-feilds secondary-btn">
                 <i className="fa-duotone fa-lock normal-icon"></i>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  value={cpassword}
                   id="auth-cpassword"
                   placeholder="Confirm password"
                   className="auth-inputs"
+                  onChange={(e) => {
+                    setCpassword(e.target.value);
+                  }}
                 />
               </span>
             </label>
           )}
 
-          <button id="auth-btn" className="btn">
+          <button
+            className="btn auth-btn"
+            type="submit"
+            onClick={handleSubmit}
+          >
             <h4>{mode === "signup" ? "Sign up" : "Sign in"}</h4>
           </button>
         </form>

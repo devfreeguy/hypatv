@@ -102,7 +102,7 @@ Table of context
 
   :root {
     /* Padding */
-    --button-padding:  clamp(0.6rem, 20vw, .85rem) clamp(.9rem, 20vw, 1rem);
+    --button-padding:  clamp(0.6rem, 20vw, .85rem) clamp(1rem, 20vw, 1.3rem);
     --medium-button-padding: clamp(0.2rem, 5vw, 0.5rem)
       clamp(0.3rem, 5vw, 0.7rem);
 

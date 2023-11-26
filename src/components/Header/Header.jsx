@@ -7,9 +7,10 @@ import { useLocation } from "react-router-dom";
 const Header = () => {
   const { pathname } = useLocation();
   const [openMenu, setOpenMenu] = useState(false);
-  const [profilePic, setProfilePic] = useState('/images/profile.png');
+  const [profilePic, setProfilePic] = useState("/images/profile.png");
   const [displayHeader, setDisplayHeader] = useState(false);
-  const [scrollEffect, setScrollEffect] = useState('');
+  const [redZone, setRedZone] = useState(false);
+  const [scrollEffect, setScrollEffect] = useState("");
 
   useEffect(() => {
     const shrinkheader = () => {
@@ -28,31 +29,47 @@ const Header = () => {
     };
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setDisplayHeader(pathname !== "/login" && pathname !== "/signup");
-  },[pathname])
-  
+    setRedZone(
+      pathname.includes("/tv/details/") || pathname.includes("/movie/details/")
+    );
+  }, [pathname]);
+
   const getMenuStatus = () => {
     setOpenMenu(!openMenu);
   };
 
-
+  const goBack = () => {
+    // Functions to go back
+    if (redZone) {
+      window.history.back();
+    }
+  };
 
   if (displayHeader) {
     return (
       <header className={scrollEffect != "" ? "shrink" : ""}>
         <div className="container" id="container">
           <div id="HeaderAction">
-            <i
-              className={`fa-solid ${
-                openMenu ? "fa-close" : "fa-bars"
-              } normal-icon mobile-props`}
-              onClick={getMenuStatus}
-            ></i>
-            <img src={Logo} alt="HypaTv" id="header-logo" />
+            {!redZone && (
+              <i
+                className={`fa-solid ${
+                  openMenu ? "fa-close" : "fa-bars"
+                } normal-icon mobile-props`}
+                onClick={getMenuStatus}
+              ></i>
+            )}
+            {redZone && (
+              <i
+                className="fa-solid fa-arrow-left normal-icon secondary-btn"
+                onClick={goBack}
+              ></i>
+            )}
+            {!redZone && <img src={Logo} alt="HypaTv" id="header-logo" />}
           </div>
 
-          <NavBar toggle={openMenu} setToggle={getMenuStatus} />
+          {!redZone && <NavBar toggle={openMenu} setToggle={getMenuStatus} />}
 
           <div className="header-action-box">
             <i className="fa-solid fa-bell normal-icon secondary-btn"></i>

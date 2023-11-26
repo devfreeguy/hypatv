@@ -34,6 +34,7 @@ header div {
   width: calc(var(--header-logo-width) * 1.1);
   margin: 0;
   object-fit: contain;
+  background: none;
 }
 
 #profile {

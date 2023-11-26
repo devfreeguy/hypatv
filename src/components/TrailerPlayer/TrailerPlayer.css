@@ -1,0 +1,39 @@
+@import url(../../styles/variables.css);
+
+.trailer-player-bg {
+  position: fixed;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: var(--light-dark-bg-color);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.trailer-player-card {
+  background-color: black;
+  padding: var(--padding);
+  max-width: 800px;
+  border-radius: var(--button-radius);
+  width: 90%;
+}
+
+.trailer-player-card-header {
+  display: flex;
+  padding: var(--padding);
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--small-gap) * 3);
+}
+
+.trailer-player-close {
+  padding: var(--padding);
+}
+
+.trailer-player-iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 5px;
+}

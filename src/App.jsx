@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Loading from "./components/Loading";
+import React, { Suspense, useState } from "react";
+import SplashScreen from "./components/SplashScreen";
 import Home from "./pages/Home";
 import CoverPhoto from "./components/CoverPhoto/CoverPhoto";
 import Header from "./components/Header/Header";
@@ -16,17 +16,17 @@ function App() {
   return (
     <BrowserRouter>
       <>
-        <Loading show={false} />
         <CoverPhoto />
         <Header />
         <main>
+          <Suspense fallback={<SplashScreen show={true} />} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/tv" element={<TvSeries />} />
             <Route path="/movie" element={<Movies />} />
             <Route path="/:type" element={<Category />} />
             <Route path="/:type/search/:keyword" element={<Category />} />
-            <Route path="/:type/:id" element={<Details />} />
+            <Route path="/:type/details/:id" element={<Details />} />
             <Route path="/login" element={<Auth />} />
             <Route path="/signup" element={<Auth />} />
           </Routes>

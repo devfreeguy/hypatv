@@ -1,23 +1,19 @@
-import "../styles/general.css";
-import Logo from "../assets/logo.png";
-import { useEffect } from "react";
+import { useLottie } from "lottie-react";
+import loader from '../../public/docs/loading.json'
 
-const Loading = ({ show }) => {
-  // const [loading, setLoading] = useState('')
+const Loading = () => {
 
-  // useEffect(()=>{
-  //   if(loading !== 'stop'){
-  //     setLoading(sessionStorage.getItem('loading'));
-  //   }
-  // })
+  const { View } = useLottie({
+      loop: true,
+      autoplay: true,
+      animationData: loader,
+    });
 
-  if (show) {
-    return (
-      <div id="splashScreen">
-        <img src={Logo} />
-      </div>
-    );
-  }
+  return (
+    <div id="loading">
+      <div id="loading-container">{View}</div>
+    </div>
+  );
 };
 
 export default Loading;

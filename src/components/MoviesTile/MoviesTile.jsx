@@ -11,7 +11,7 @@ const MoviesTile = ({ data, type }) => {
   const [image, setImage] = useState("./images/backdrop.jpg");
 
   const goToDetails = () => {
-    navigate(`/${type}/${data.id}`);
+    navigate(`/${type}/details/${data.id}`);
   };
 
   useEffect(() => {
@@ -19,12 +19,11 @@ const MoviesTile = ({ data, type }) => {
   }, []);
 
   return (
-    <div id="movie-tile" className="ordinary" onClick={goToDetails}>
+    <div id="movie-tile" className="ordinary" onClick={()=>{goToDetails()}}>
       <div id="movie-tile-main">
         <img
           src={image ? apiConfig.w500Image(image) : placeholder}
           id="movie-tile-image"
-          alt={type === "tv" ? data.name : data.title}
         />
         <div className="overlay">
           <button className="btn">

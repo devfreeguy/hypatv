@@ -1,5 +1,5 @@
 const dateConverter = (date = '', individualType = "") => {
-  const [year, month, day] = date.split("-");
+  const [year = '', month = '', day = ''] = date.split("-");
 
   if (individualType === "") {
     return `${monthIdToText(month)} ${day}, ${year}`;

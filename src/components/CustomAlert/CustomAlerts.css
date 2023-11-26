@@ -1,0 +1,35 @@
+@import url(../../styles/variables.css);
+
+.custom-alert-bg {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: var(--light-dark-bg-color);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-dialog{
+  display: flex;
+  flex-direction: column;
+  background: var(--secondary-bg-color);
+  padding: 1.2rem;
+  border-radius: var(--button-radius);
+  margin: 1rem;
+  gap: calc(var(--small-gap) * 2);
+  max-width: 300px;
+  width: 100%;
+}
+
+.custom-dialog-btn-bg {
+  display: flex;
+  align-items: center;
+  gap: var(--small-gap);
+}
+
+.custom-dialog-btn {
+  flex: 1;
+}

@@ -2,7 +2,7 @@
 
 #hero-slider-bg {
   width: 100vw;
-  height: 110vh;
+  height: 120vh;
   position: relative;
   max-height: 650px;
 }
@@ -26,7 +26,7 @@
 #hero-slider-welcome,
 #hero-slider-main {
   width: 100%;
-  padding-top: var(--header-height);
+  padding-top: calc(var(--header-height) + 1rem);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,7 +82,6 @@
 .hero-buttons {
   display: flex;
   gap: 10px;
-  justify-content: center;
 }
 
 #hero-welcome-buttons button {
@@ -90,15 +89,21 @@
 }
 
 @media screen and (max-width: 1024px) {
-  #hero-slider-welcome {
-    flex-direction: column;
-  }
+  #hero-slider-bg{
+   max-height: 850px;
+  } 
 
+  #hero-slider-welcome {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+  
   .hero-welcome-side {
     width: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
   }
   #hero-welcome-details {
     text-align: center;
@@ -112,6 +117,8 @@
 }
 
 @media screen and (max-width: 768px) {
+
+
   #hero-main-poster {
     display: none;
   }
@@ -135,6 +142,9 @@
   #hero-main-details {
     width: 100%;
     margin-bottom: 5rem;
+  }
+
+  #hero-slider-welcome {
   }
 }
 

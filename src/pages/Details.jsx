@@ -1,4 +1,4 @@
-import tmdbAPI, { movieType } from "../config/api";
+import tmdbAPI from "../config/api";
 import "../styles/Details.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -10,17 +10,20 @@ import "swiper/css";
 import TrailerCard from "../components/TrailerCard/TrailerCard";
 import SeasonsCard from "../components/SeasonsCard/SeasonsCard";
 import GenreTile from "../components/GenreTile/GenreTile";
+import TrailerPlayer from "../components/TrailerPlayer/TrailerPlayer";
 
 const Details = () => {
   const { type, id } = useParams();
   const [data, setData] = useState([]);
-  const [genre, setGenre] = useState([]);
-  const [trailers, setTrailers] = useState([]);
   const [cast, setCast] = useState([]);
   const [crew, setCrew] = useState([]);
+  const [genre, setGenre] = useState([]);
   const [seasons, setSeasons] = useState([]);
+  const [trailers, setTrailers] = useState([]);
+  const [trailerPos, setTrailerPos] = useState(0);
   const [creators, setCreators] = useState([]);
   const [language, setLanguage] = useState([]);
+  const [showTrailer, setShowTrailer] = useState(false);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -48,6 +51,7 @@ const Details = () => {
           params: {},
         });
         setCast(response.data.cast);
+        setCrew(response.data.crew);
       } catch (e) {
         console.log(e);
       }
@@ -57,11 +61,17 @@ const Details = () => {
       try {
         const response = await tmdbAPI.getVideos(type, id);
         setTrailers(response.data.results);
+        console.log(response.data.results);
       } catch (e) {
         console.log(e);
       }
     };
   }, []);
+
+  const showTrailerPlayer = (choice, pos = 0) => {
+    setShowTrailer(choice);
+    setTrailerPos(pos);
+  };
 
   return (
     <section id="details-section">
@@ -125,63 +135,27 @@ const Details = () => {
                   </span>
                 </span>
                 <div id="details-hero-data-buttons">
+                  {trailers.length > 0 && (
+                    <button
+                      className="btn"
+                      onClick={() => {
+                        showTrailerPlayer(true);
+                      }}
+                    >
+                      <i className="fa-solid fa-play"></i>
+                    </button>
+                  )}
                   <button className="btn">
                     <h3>Watch now</h3>
                   </button>
                   <button className="relative-btn">
-                    <h3>Play trailer</h3>
+                    <h3>Download</h3>
                   </button>
-                  {/* <button className="relative-btn">
-                    <i className="fa-solid fa-download normal-icon"></i>
-                  </button> */}
                 </div>
               </div>
             </div>
-            <div id="details-others">
-              {creators !== null && (
-                <>
-                  <h4 className="underlined-text">Creator</h4>
-                  <div className="details-top-credit">
-                    {creators?.map((creator) => {
-                      return (
-                        <GenreTile
-                          custom_image={creator.profile_path}
-                          custom_name={creator.name}
-                          size={"small"}
-                        />
-                      );
-                    })}
-                  </div>
-                </>
-              )}
-              {crew !== null && (
-                <>
-                  <h4 className="underlined-text">Director</h4>
-                  <div className="details-top-credit grid-view">
-                    {crew.map((crew) => {
-                      if (crew?.job == "Director") {
-                        return (
-                          <GenreTile
-                            custom_image={crew.profile_path}
-                            custom_name={crew.name}
-                            size={"small"}
-                          />
-                        );
-                      }
-                    })}
-                  </div>
-                </>
-              )}
-
-              <button className="secondary-btn"></button>
-            </div>
-            {/* <div id="trailer-bg">dfr</div> */}
           </div>
           <div id="details-main-bg">
-            <div className="datails-container" id="details-main-summary">
-              <h4 className="underlined-text">Summary</h4>
-              <h3 className="normal-text">{data.overview}</h3>
-            </div>
             {seasons && (
               <div className="datails-container" id="details-main-seasons">
                 <h4 className="underlined-text">Seasons</h4>
@@ -204,49 +178,98 @@ const Details = () => {
                 </Swiper>
               </div>
             )}
-            <div className="datails-container" id="details-main-summary">
-              <h4 className="underlined-text">Videos</h4>
-              <Swiper
-                grabCursor={true}
-                spaceBetween={10}
-                slidesPerView={"auto"}
-              >
-                {trailers.map((trailer) => {
-                  if (trailer.site === "YouTube") {
-                    return (
-                      <SwiperSlide key={trailer.id}>
-                        <TrailerCard data={trailer} />
-                      </SwiperSlide>
-                    );
-                  }
-                })}
-              </Swiper>
-            </div>
-            <div className="datails-container" id="cast-and-crew-bg">
-              <h4 className="underlined-text">Cast and crew</h4>
-              <div id="casts-container">
+            {data.overview && (
+              <div className="datails-container" id="details-main-summary">
+                <h4 className="underlined-text">Summary</h4>
+                <h3 className="normal-text">{data.overview}</h3>
+              </div>
+            )}
+            {trailers.length > 0 && (
+              <div className="datails-container" id="details-main-summary">
+                <h4 className="underlined-text">Videos</h4>
                 <Swiper
                   grabCursor={true}
                   spaceBetween={10}
                   slidesPerView={"auto"}
                 >
-                  {cast?.map((member) => {
-                    try {
+                  {trailers.map((trailer, id) => {
+                    if (trailer.site === "YouTube") {
                       return (
-                        <SwiperSlide key={member.id}>
-                          <UserCard data={member} />
+                        <SwiperSlide key={trailer.id}>
+                          <TrailerCard
+                            data={trailer}
+                            id={id}
+                            playTrailer={(pos) => {
+                              showTrailerPlayer(true, pos);
+                            }}
+                          />
                         </SwiperSlide>
                       );
-                    } catch (error) {
-                      console.log(error);
                     }
                   })}
                 </Swiper>
               </div>
-            </div>
+            )}
+            {cast.length > 0 && (
+              <div className="datails-container" id="cast-bg">
+                <h4 className="underlined-text">Cast member</h4>
+                <div id="casts-container">
+                  <Swiper
+                    grabCursor={true}
+                    spaceBetween={10}
+                    slidesPerView={"auto"}
+                  >
+                    {cast?.map((member) => {
+                      try {
+                        return (
+                          <SwiperSlide key={member.id}>
+                            <UserCard data={member} type="cast" />
+                          </SwiperSlide>
+                        );
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    })}
+                  </Swiper>
+                </div>
+              </div>
+            )}
+            {crew.length > 0 && (
+              <div className="datails-container" id="crew-bg">
+                <h4 className="underlined-text">Crew member</h4>
+                <div id="casts-container">
+                  <Swiper
+                    grabCursor={true}
+                    spaceBetween={10}
+                    slidesPerView={"auto"}
+                  >
+                    {crew?.map((member) => {
+                      try {
+                        return (
+                          <SwiperSlide key={member.id}>
+                            <UserCard data={member} type="crew" />
+                          </SwiperSlide>
+                        );
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    })}
+                  </Swiper>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
+      {showTrailer && (
+        <TrailerPlayer
+          data={trailers}
+          pos={trailerPos}
+          close={() => {
+            showTrailerPlayer(false);
+          }}
+        />
+      )}
     </section>
   );
 };
