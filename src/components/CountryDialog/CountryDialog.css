@@ -4,6 +4,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--small-gap);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: var(--light-dark-bg-color);
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }
 
 .country-dialog-form,
@@ -11,6 +18,10 @@
   display: flex;
   align-items: center;
   gap: var(--small-gap);
+  width: 100%;
+}
+.country-dialog-form{
+  width: 95%;
 }
 
 #country-dialog-searcher {
@@ -20,15 +31,22 @@
 .country-dialog-card {
   display: flex;
   flex-direction: column;
-  max-height: 250px;
+  flex: 1;
   overflow-y: scroll;
   gap: var(--small-gap);
   padding: 0 0.5rem;
   transition: all .3s;
+  max-height: 400px;
+  width: 100%;
 }
 
 .country-dialog-tile{
   cursor: pointer;
+}
+
+.country-dialog-cname {
+  flex: 1;
+  text-align: start;
 }
 
 .country-dialog-tile-flag {

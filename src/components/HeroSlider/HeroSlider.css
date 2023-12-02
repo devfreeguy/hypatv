@@ -15,6 +15,8 @@
   overflow: hidden;
   display: flex;
   height: 100%;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   position: absolute;
   background: linear-gradient(
@@ -84,22 +86,24 @@
   gap: 10px;
 }
 
-#hero-welcome-buttons button {
-  width: 30%;
-}
-
 @media screen and (max-width: 1024px) {
   #hero-slider-bg{
-   max-height: 850px;
+    max-height: 650px;
   } 
+  #hero-slider-main {
+    display: flex;
+    padding: 0;
+    width: 90%;
+    justify-content: center;
+  }
 
   #hero-slider-welcome {
     flex-direction: column-reverse;
-    justify-content: flex-end;
+    justify-content: center;
   }
   
   .hero-welcome-side {
-    width: 70%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,17 +114,28 @@
   }
   #hero-main-details {
     text-align: none;
+    width:100%;
+  }
+  .hero-main-side {
+    width: 60%;
+
   }
   #hero-welcome-buttons {
+    width: 100%;
     justify-content: center;
+    align-items: center;
+  }
+
+  #hero-welcome-buttons .btn {
+    width: initial;
   }
 }
 
 @media screen and (max-width: 768px) {
 
 
-  #hero-main-poster {
-    display: none;
+  #hero-slider-main {
+    flex-direction: column;
   }
 
   .hero-main-side {
@@ -136,7 +151,7 @@
   }
 
   .hero-buttons.active {
-    /* width: 100%; */
+    justify-content: center;
   }
 
   #hero-main-details {

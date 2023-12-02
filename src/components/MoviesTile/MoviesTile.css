@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   gap: var(--small-gap);
+  aspect-ratio: 2/3;
 }
 
 #movie-tile.ordinary {
@@ -105,4 +106,8 @@
   #big-movie-tile-image.big-movie-tile-small {
     width: 120px;
   }
+  
+#movie-tile.ordinary {
+  width: 130px;
+}
 }

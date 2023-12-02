@@ -4,9 +4,9 @@ const getGenreImage = (name) => {
 
   // const cleanName = name.replace("&", "");
 
-  const simplifiedName = name?.replace(" ", "-").toLowerCase().trim();
+  const simplifiedName = name?.replaceAll(" ", "-").toLowerCase().trim();
 
-  return (`./images/genre-images/${simplifiedName}.jpg`);
+  return (`../../assets/genre-images/${simplifiedName}.jpg`);
 };
 
 export default getGenreImage;

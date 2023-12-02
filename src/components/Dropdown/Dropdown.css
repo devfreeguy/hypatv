@@ -2,36 +2,38 @@
 
 .dropdown-bg,
 button.flex-outlined-btn {
-  position: relative;
   display: flex;
   margin: 0;
 }
+
 .dropdown-bg{
   margin: .5rem 1rem;
+  position: relative;
 }
-
 
 .dropdown {
   position: absolute;
   background: var(--secondary-bg-color);
-  padding: var(--button-padding);
+  padding: none;
   left: auto;
   right: auto;
   border-radius: var(--button-radius);
   width: initial;
   height: 0;
   transform: translateY(40px);
-  /* overflow: hidden; */
   visibility: hidden;
-  transition: height .5s;
-  z-index: 4;
+  transition: height .5s, opacity .5s, visibility .5s, padding .1s;
   opacity: 0;
+  overflow-y: hidden;
 }
+
 .dropdown.active {
+  animation: unwrapHeight .5s;
+  padding: .5rem;
   height: initial;
   visibility: visible;
-  animation: unwrapHeight .5s;
   opacity: 1;
+  z-index: 4;
 }
 
 @keyframes unwrapHeight {
@@ -45,7 +47,7 @@ button.flex-outlined-btn {
 
 .dropdown-list-item {
   padding: var(--button-padding);
-  border-radius: var(--button-padding);
+  border-radius: var(--border-radius);
   cursor: pointer;
   
 }

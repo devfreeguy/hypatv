@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./Dropdown.css";
 
-const Dropdown = ({ type, update }) => {
+const Dropdown = ({ type, category, update = ()=>{} }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("Popular");
+  const [selected, setSelected] = useState(category);
 
   const options = {
     tv: ["On the air", "Popular", "Top rated"],
     movie: ["Upcoming", "Popular", "Top rated"],
   };
 
-  const selectOption = () => {
-    setIsOpen(!isOpen);
-    update(()=>{
-      return selected;
-    })
-    // console.log('working');
-  };
+  useEffect(()=>{
+    update(selected)
+  },[selected])
+
+  const handleDropdown = () => {
+    setIsOpen(!isOpen)
+  }
 
   useEffect(()=>{
     setSelected("Popular")
@@ -24,7 +24,7 @@ const Dropdown = ({ type, update }) => {
 
   return (
     <div className="dropdown-bg">
-      <button className="flex-outlined-btn" onClick={() => selectOption()}>
+      <button className="flex-outlined-btn" onClick={handleDropdown}>
         <h5 className="sub-text">{selected}</h5>
         <i className="fa-solid fa-angle-down small-icon"></i>
       </button>
@@ -35,8 +35,12 @@ const Dropdown = ({ type, update }) => {
             key={item}
               className="dropdown-list-item"
               onClick={() => {
-                setSelected(item);
-                selectOption();
+                if(item == selected){
+                  handleDropdown()
+                }else {
+                  setSelected(item);
+                  // selectOption();
+                }
               }}
             >
               <h4

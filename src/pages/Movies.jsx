@@ -1,48 +1,46 @@
 import React, { useEffect, useRef, useState } from "react";
 import tmdbAPI, { movieType } from "../config/api";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Scrollbar, Mousewheel } from "swiper/modules";
 import SearchBar from "../components/SearchBar/SearchBar";
 import MoviesTile from "../components/MoviesTile/MoviesTile";
 import Dropdown from "../components/Dropdown/Dropdown";
-import GenreTab from "../components/GenreTab/GenreTab";
 import { useNavigate } from "react-router-dom";
 import "../styles/variables.css";
 import "../styles/Styles.css";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
+import { moviesCategory } from '../config/util'
 
 export const Movies = () => {
+  // let category = "Popular";
   const [moviesData, setMoviesData] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState("Popular");
+  const [currentCategory, setCurrentCategory] = useState(
+    moviesCategory
+      ? moviesCategory
+      : "Popular"
+  );
   const [currentPage, setCurrentPage] = useState(1);
 
-  
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  let category = "Popular";
 
   useEffect(() => {
     getMovies();
-  }, []);
-  
-  // useEffect(() => {
-  //   setCurrentPage(1);
-  //   getMovies()
-  // }, [currentCategory]);
-
-  useEffect(() => {
-    setCurrentPage(currentPage + 1);
-  }, [moviesData]);
-
+  }, [currentPage, currentCategory]);
 
   const LoadMore = () => {
-    if (category !== currentCategory) {
-      setMoviesData([]);
-      category = currentCategory;
-    }
-    getMovies();
+    setCurrentPage(currentPage + 1);
+  };
+
+  // useEffect(()=>{
+    
+  // },[moviesCategory])
+
+  const handleCategoryChange = (category) => {
+    sessionStorage.setItem("moviesCategory", category)
+    setCurrentCategory(category);
+    setCurrentPage(1);
+    setMoviesData([]);
   };
 
   const getMovies = async () => {
@@ -56,7 +54,6 @@ export const Movies = () => {
       );
       const data = response.data.results;
       setMoviesData([...moviesData, ...data]);
-      console.log(response);
     } catch (e) {
       console.log(e);
     }
@@ -65,27 +62,13 @@ export const Movies = () => {
   return (
     <section>
       <div className="main-action">
-        <div className="main-genre-bg">
-          <Swiper
-            direction={"horizontal"}
-            slidesPerView={"auto"}
-            freeMode={true}
-            scrollbar={true}
-            mousewheel={true}
-            modules={[FreeMode, Scrollbar, Mousewheel]}
-          >
-            <SwiperSlide>
-              <GenreTab direction="horizontal" />
-            </SwiperSlide>
-          </Swiper>
-        </div>
         <div className="main-bg">
           <div className="main-action-bar">
-            {/* <CategoryTile /> */}
             <Dropdown
               type="movie"
+              category={moviesCategory}
               update={(updatedData) => {
-                setCurrentCategory(updatedData);
+                handleCategoryChange(updatedData);
               }}
             />
             <SearchBar />

@@ -5,3 +5,5 @@ export const RouteList = {
   // Category: "/:category/search/:keyword",
   // Details: "/:category/:id",
 };
+
+export const savedUserdata = JSON.parse(sessionStorage.getItem("usersdata"));

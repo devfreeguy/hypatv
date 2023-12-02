@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 import apiConfg from "./apiconfg";
 
-const axiosClient = axios.create({
+export const dbAxiosClient = axios.create({
   baseURL: apiConfg.baseUrl,
   headers: {
     "Content-Type": "application/json",
@@ -11,9 +11,9 @@ const axiosClient = axios.create({
     queryString.stringify({ ...params, api_key: apiConfg.apiKey }),
 });
 
-axiosClient.interceptors.request.use(async (config) => config);
+dbAxiosClient.interceptors.request.use(async (config) => config);
 
-axiosClient.interceptors.request.use(
+dbAxiosClient.interceptors.request.use(
   (response) => {
     if (response && response.data) {
       return response.data;
@@ -25,4 +25,4 @@ axiosClient.interceptors.request.use(
   }
 );
 
-export default axiosClient;
+// export default dbAxiosClient;

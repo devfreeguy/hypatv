@@ -30,8 +30,8 @@ const HeroSlider = () => {
     };
     getMovies();
 
-    const jhwviibibciussicvkv = sessionStorage.getItem("jhwviibibciussicvkv");
-    jhwviibibciussicvkv ? setIsLoggedIn(true) : setIsLoggedIn(false)
+    const user = sessionStorage.getItem("usersdata");
+    user ? setIsLoggedIn(true) : setIsLoggedIn(false)
   }, []);
 
   // const goToDetails = (id) => {
@@ -100,14 +100,8 @@ const HeroSlider = () => {
                     id="hero-welcome-buttons"
                     className={`hero-buttons ${animateIn ? "active" : ""}`}
                   >
-                    <button className="btn" onClick={() => navigate("signup")}>
-                      <h4>Sign up</h4>
-                    </button>
-                    <button
-                      className="relative-btn"
-                      onClick={() => navigate("login")}
-                    >
-                      <h4>Sign in</h4>
+                    <button className="btn" onClick={() => navigate("/signup")}>
+                      <h4>Create an account</h4>
                     </button>
                   </div>
                 </div>

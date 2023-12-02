@@ -1,7 +1,7 @@
 {
   "name": "hypatv",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "axios": "^1.6.1",
-    "embla-carousel-react": "^8.0.0-rc14",
     "firebase": "^10.6.0",
     "lottie-react": "^2.4.0",
     "query-string": "^8.1.0",

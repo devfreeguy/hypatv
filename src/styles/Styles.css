@@ -1,11 +1,11 @@
 @import url(../styles/variables.css);
 
 .main-action {
-  margin-top: calc(var(--header-height) + 1rem);
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   padding: var(--padding);
+  margin-top: calc(var(--header-height) + 1rem);
 }
 
 .main-action-bar {
@@ -14,6 +14,7 @@
   align-items: center;
   position: sticky;
   padding-bottom: 1.5rem;
+  z-index: 10;
 }
 
 .main-bg {
@@ -28,11 +29,21 @@
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: var(--small-gap);
   /* height: 100%; */
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  align-items: center;
+  justify-content: center;
 }
 
 .main-button-bg{
   display: flex;
   justify-content: center;
   margin: 1rem;
+}
+
+
+@media screen and (max-width: 556px) {
+  .main-list-bg {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+
 }

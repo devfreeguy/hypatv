@@ -101,8 +101,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 main {
+  /* display: flex; */
   width: 100%;
   transition: all 0.5s;
+  height: 100vh;
+  flex-grow: 1;
 }
 
 .container {
@@ -122,19 +125,48 @@ main {
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
+.dialog{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: var(--light-dark-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .dialog-card {
   width: 100%;
   max-width: 350px;
-  max-height: 80vh;
   min-height: 400px;
   background: var(--secondary-bg-color);
   border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  margin: 2rem;
   padding: 3rem 1rem;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  gap: var(--small-gap);
+}
+
+.shimmer-card {
+  background: var(--card-color);
+  border-radius: var(--border-radius);
+  animation: shimmerEffect infinite;
+}
+
+@keyframes shimmerEffect {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: .7;
+  }
+  50% {
+    opacity: .5;
+  }
 }
 /* ------------ */
 
@@ -288,6 +320,18 @@ progress {
   color: var(--sub-text-color);
   font-weight: 400;
 }
+
+.error-text {
+  color: rgb(255, 95, 95);
+  font-weight: 400;
+  width: 100%;
+  padding: 0 1rem;
+  text-align: center;
+  padding: var(--padding);
+  border-radius: var(--button-radius);
+  border: solid 1px rgb(255, 95, 95);
+  background: var(--card-color);
+}
 .normal-text {
   color: var(--text-color);
   font-weight: 400;
@@ -346,7 +390,7 @@ progress {
 .secondary-btn {
   display: inline-block;
   transition: all 0.3s;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.45);
   color: var(--accent-color);
   padding: var(--padding);
   border-radius: var(--button-radius);
@@ -371,8 +415,8 @@ progress {
 
 .close-btn {
   background: var(--bg-color);
-  padding: 5px;
-  border-radius: var(--button-radius);
+  padding: 5px 8px;
+  border-radius: 4px;
   width: clamp();
   height: unset;
   transition: all 0.2s;
@@ -405,7 +449,7 @@ progress {
 
 #splashScreen,
 #loading {
-  z-index: 100;
+  z-index: 10000;
   background: var(--bg-color);
   position: fixed;
   height: 100vh;

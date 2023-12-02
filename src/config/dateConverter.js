@@ -1,15 +1,20 @@
 const dateConverter = (date = '', individualType = "") => {
-  const [year = '', month = '', day = ''] = date.split("-");
 
-  if (individualType === "") {
-    return `${monthIdToText(month)} ${day}, ${year}`;
-  } else if (individualType === "month") {
-    return monthIdToText(month);
-  } else if (individualType === "day") {
-    return day;
-  } else if (individualType === "year") {
-    return year;
+  if(date){
+    const [year = '', month = '', day = ''] = date.split("-");
+    if (individualType === "") {
+      return `${monthIdToText(month)} ${day}, ${year}`;
+    } else if (individualType === "month") {
+      return monthIdToText(month);
+    } else if (individualType === "day") {
+      return day;
+    } else if (individualType === "year") {
+      return year;
+    }
+  }else{
+    return '';
   }
+
 };
 
 function monthIdToText(id) {

@@ -6,13 +6,14 @@ import tmdbAPI, { type, movieType, tvType } from "../../config/api";
 import "swiper/css";
 import { useNavigate } from "react-router-dom";
 
-const SectionGroups = ({ name, type, category }) => {
-  // const navigate = useNavigate(null);
+const SectionGroups = ({ name, type, category, mode = 'normal' }) => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (type === "tv") {
-      const getTvSeries = async () => {
+    if (mode === 'normal'){
+      if (type === "tv") {
+        const getTvSeries = async () => {
         const params = { page: 1 };
         try {
           const response = await tmdbAPI.getTvList(tvType[category], {
@@ -24,7 +25,7 @@ const SectionGroups = ({ name, type, category }) => {
         }
       };
       getTvSeries();
-    } else {
+    } else if (type === "movie") {
       const getMovies = async () => {
         const params = { page: 1 };
         try {
@@ -38,16 +39,34 @@ const SectionGroups = ({ name, type, category }) => {
       };
       getMovies();
     }
+  } else {
+      const getTrendingMovies = async () => {
+        try {
+          const response = await tmdbAPI.getTrendingList(type)
+          setData(response.data.results);
+        } catch (error) {
+          console.log(e);
+        }
+      }
+      getTrendingMovies();
+    }
   }, []);
 
+  const handleSeeMore = () =>{
+    navigate(`/${type}`)
+  }
+
   return (
-    data && (
-      <section id="section-group-tile">
+    data.length > 0 && (
+      <section
+        id="section-group-tile"
+        className={mode === "relative" ? "card" : ""}
+      >
         <div id="section-group-header">
           <h3>{name.trim()}</h3>
           <button
-            // onClick={}
-            className="secondary-btn"
+            onClick={handleSeeMore}
+            className={`secondary-btn ${mode === "relative" ? "card" : ""}`}
           >
             See more
           </button>

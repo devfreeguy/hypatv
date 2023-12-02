@@ -13,9 +13,9 @@ const SeasonsCard = ({ data }) => {
         className="season-card-img"
       />
       <div className="season-card-details">
-        {data.season_number !== 0 && (
+        {/* {data.season_number !== 0 && (
           <h5 className="season-card-id">Season {data.season_number}</h5>
-        )}
+        )} */}
         <h3 className="season-card-name">{data.name}</h3>
         <h4 className="season-card-overview sub-text">{data.overview}</h4>
         <span className="relative-btn season-card-episode-btn">

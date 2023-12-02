@@ -1,0 +1,98 @@
+@import url(../../styles/variables.css);
+
+footer,
+.footer-overlay,
+.footer-grid,
+.footer-copyright {
+  width: 100%;
+  height: auto;
+}
+
+footer {
+  margin-top: 2rem;
+  background-image: url(/images/movie-poster-collage.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: darken;
+}
+
+.footer-overlay {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, var(--bg-color), rgba(0, 0, 0, 0.95));
+  padding: var(--padding);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--small-gap);
+}
+
+.footer-sections {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--padding);
+  gap: var(--small-gap);
+}
+
+.footer-sections-header {
+  color: white;
+}
+
+.footer-logo {
+  background: none;
+  width: 100px;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links,
+.footer-social-links {
+  cursor: pointer;
+  transition: scale 0.3s;
+  display: inline-block;
+}
+
+.footer-links {
+  max-width: fit-content;
+}
+
+.footer-social-link-list {
+  display: flex;
+  padding: .5rem 0;
+  align-items: center;
+  gap: var(--small-gap);
+}
+
+.footer-links:hover,
+.footer-social-links:hover {
+  color: var(--normal-color);
+  scale: 1.03;
+}
+
+.footer-copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding);
+}
+
+
+@media screen and (max-width: 412px) {
+  /* .footer-sections:first-child{
+    width: 100vw;
+  } */
+  .footer-sections, .footer-sections > * {
+    align-items: center;
+    text-align: center;
+  }
+}

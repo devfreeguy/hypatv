@@ -12,7 +12,7 @@ const CustomAlerts = ({ type = "alert", title = "", message, button = {} }) => {
             <button
               className="custom-dialog-btn relative-btn"
               onClick={() => {
-                button?.positive?.perform();
+                button?.negative?.perform();
               }}
             >
               <h4>{button && button?.negative?.text}</h4>

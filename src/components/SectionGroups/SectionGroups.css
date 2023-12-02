@@ -9,13 +9,22 @@
   gap: calc(var(--small-gap) * 3);
   padding-top: 1.1rem;
 }
+
+#section-group-tile.card {
+  background-color: var(--card-color);
+}
+
 #section-group-header{
   display: flex;
   justify-content: space-between;
 }
 
 #section-group-header button {
-  padding: var(--mini-padding);
+  padding: .5rem .7rem;
+}
+
+#section-group-header button.card {
+  display: none;
 }
 
 #section-group-main {

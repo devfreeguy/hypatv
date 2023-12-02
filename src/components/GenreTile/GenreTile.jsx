@@ -9,7 +9,7 @@ const GenreTile = (props) => {
   const data = props.data;
   const imageUrl =
     props?.custom_image !== null
-      ? apiConfig.w500Image(props?.custom_image)
+      ? apiConfig.w500Image(props.custom_image)
       : getGenreImage(data && data?.name);
 
   return (

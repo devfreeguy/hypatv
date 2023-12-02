@@ -15,9 +15,13 @@
 .profile-info-card {
   text-align: center;
   gap: var(--small-gap);
-  overflow-y: auto;
 }
 
 .dialog-form{
   transition: all .5s;
+}
+
+#country-code {
+  width: 50px;
+  text-align: center;
 }

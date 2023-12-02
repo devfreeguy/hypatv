@@ -2,15 +2,20 @@ import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/logo.png";
 import "./Header.css";
 import NavBar from "../NavBar/NavBar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import ActionCard from "../ActionCard/ActionCard";
+import { savedUserdata } from "../../config/config";
 
 const Header = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
   const [profilePic, setProfilePic] = useState("/images/profile.png");
   const [displayHeader, setDisplayHeader] = useState(false);
   const [redZone, setRedZone] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrollEffect, setScrollEffect] = useState("");
+  const [actionCard, setActionCard] = useState(false);
 
   useEffect(() => {
     const shrinkheader = () => {
@@ -30,7 +35,11 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    setDisplayHeader(pathname !== "/login" && pathname !== "/signup");
+    setDisplayHeader(
+      pathname !== "/login" &&
+        pathname !== "/signup" &&
+        pathname !== "/more-info"
+    );
     setRedZone(
       pathname.includes("/tv/details/") || pathname.includes("/movie/details/")
     );
@@ -44,6 +53,15 @@ const Header = () => {
     // Functions to go back
     if (redZone) {
       window.history.back();
+    }
+  };
+
+  const handleProfileClick = () => {
+    console.log(savedUserdata);
+    if (sessionStorage.getItem("usersdata") === null) {
+      navigate("/login");
+    } else {
+      setActionCard(!actionCard);
     }
   };
 
@@ -71,12 +89,29 @@ const Header = () => {
 
           {!redZone && <NavBar toggle={openMenu} setToggle={getMenuStatus} />}
 
-          <div className="header-action-box">
-            <i className="fa-solid fa-bell normal-icon secondary-btn"></i>
-            {/* <i className="fa-solid fa-user normal-icon secondary-btn"></i> */}
-            <img src={profilePic} alt="Profile" id="profile" />
-          </div>
+          {isLoggedIn ? (
+            <div className="header-action-box">
+              <i className="fa-solid fa-bookmark medium-icon secondary-btn"></i>
+              <img
+                src={profilePic}
+                alt="Profile"
+                id="profile"
+                onClick={handleProfileClick}
+              />
+            </div>
+          ) : (
+            <button className="secondary-btn" onClick={() => navigate("login")}>
+              <h4>Sign in</h4>
+            </button>
+          )}
         </div>
+        {actionCard && (
+          <ActionCard
+            close={() => {
+              setActionCard(false);
+            }}
+          />
+        )}
       </header>
     );
   }
