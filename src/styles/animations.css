@@ -63,3 +63,18 @@
     display: none;
   }
 }
+
+
+@keyframes expandHeight {
+  0%{
+    height: 0;
+    opacity: 0;
+  }
+  40%{
+    height: 50%;
+  }
+  100%{
+    height: initial;
+    opacity: 1;
+  }
+}

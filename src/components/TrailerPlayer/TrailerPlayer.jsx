@@ -6,7 +6,7 @@ const TrailerPlayer = ({data, pos = 0, close}) => {
   
 
   return (
-    <div className="trailer-player-bg">
+    <div className="trailer-player-bg dialog">
       <div className="trailer-player-card">
         <div className="trailer-player-card-header">
           <h4 className="trailer-player-name single-line-text">{data[pos].name}</h4>

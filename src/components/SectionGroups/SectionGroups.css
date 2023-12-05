@@ -1,4 +1,5 @@
 @import url(../../styles/variables.css);
+@import url(../../styles/animations.css);
 
 #section-group-tile {
   display: flex;
@@ -8,10 +9,16 @@
   border-radius: var(--border-radius);
   gap: calc(var(--small-gap) * 3);
   padding-top: 1.1rem;
+  overflow-y: hidden;
+  transition: height .5s;
+  height: 0px;
+  animation: expandHeight 2s;
+  height: initial;
 }
 
 #section-group-tile.card {
-  background-color: var(--card-color);
+  background-color: var(--secondary-bg-color);
+  margin: auto 0;
 }
 
 #section-group-header{

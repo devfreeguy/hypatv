@@ -9,7 +9,8 @@ import "../styles/Styles.css";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
-import { moviesCategory } from '../config/util'
+import { moviesCategory, shuffleArray } from '../config/util'
+import SectionGroups from "../components/SectionGroups/SectionGroups";
 
 export const Movies = () => {
   // let category = "Popular";
@@ -20,9 +21,16 @@ export const Movies = () => {
       : "Popular"
   );
   const [currentPage, setCurrentPage] = useState(1);
+  const [trending, setTrending] = useState(false)
 
   // const navigate = useNavigate();
 
+  useEffect(() => {
+    setTimeout(()=>{
+      setTrending(true)
+    }, 5000)
+  }, [])
+  
 
   useEffect(() => {
     getMovies();
@@ -31,10 +39,6 @@ export const Movies = () => {
   const LoadMore = () => {
     setCurrentPage(currentPage + 1);
   };
-
-  // useEffect(()=>{
-    
-  // },[moviesCategory])
 
   const handleCategoryChange = (category) => {
     sessionStorage.setItem("moviesCategory", category)
@@ -53,7 +57,7 @@ export const Movies = () => {
         }
       );
       const data = response.data.results;
-      setMoviesData([...moviesData, ...data]);
+      setMoviesData([...moviesData, ...shuffleArray(data)]);
     } catch (e) {
       console.log(e);
     }
@@ -73,6 +77,12 @@ export const Movies = () => {
             />
             <SearchBar />
           </div>
+          {trending && (<SectionGroups
+            name={"Recommended"}
+            category={currentCategory}
+            type={"movie"}
+            mode="trending"
+          />)}
           <div className="main-list-bg">
             {moviesData?.map((movieItem) => {
               return (

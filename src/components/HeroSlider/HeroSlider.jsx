@@ -7,6 +7,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import "./HeroSlider.css";
 import "swiper/css";
+import { shuffleArray } from "../../config/util";
 
 const HeroSlider = () => {
   const navigate = useNavigate();
@@ -22,8 +23,9 @@ const HeroSlider = () => {
         const response = await tmdbAPI.getMoviesList(movieType.popular, {
           params,
         });
-        setHeroMovie(response.data.results.slice(0, 8));
-        setWelcomeMovie(response.data.results.slice(0, 3));
+        const data = response.data.results;
+        setHeroMovie(shuffleArray(data.slice(0, 8)));
+        setWelcomeMovie(shuffleArray(data.slice(0, 3)));
       } catch (e) {
         console.log(e);
       }
@@ -31,7 +33,7 @@ const HeroSlider = () => {
     getMovies();
 
     const user = sessionStorage.getItem("usersdata");
-    user ? setIsLoggedIn(true) : setIsLoggedIn(false)
+    user ? setIsLoggedIn(true) : setIsLoggedIn(false);
   }, []);
 
   // const goToDetails = (id) => {

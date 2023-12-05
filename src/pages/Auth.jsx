@@ -30,16 +30,19 @@ const Auth = () => {
     }
   }, []);
 
-  useEffect(() => {}, [error]);
-
+  // To switch between Login and Signup
   const switchMode = () => {
     mode === "signup" ? setMode("login") : setMode("signup");
   };
 
+  // Show or hide password
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
 
+
+  // TODO: onSubmit, check the mode the user is
+  // and proceed with authentication
   const handleSubmit = async () => {
     try {
       event.preventDefault();

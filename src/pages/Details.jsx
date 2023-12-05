@@ -1,7 +1,7 @@
 import tmdbAPI from "../config/api";
 import "../styles/Details.css";
 import "swiper/css";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apiConfig from "../config/apiconfg";
 import dateConverter from "../config/dateConverter";
@@ -13,8 +13,10 @@ import SeasonsCard from "../components/SeasonsCard/SeasonsCard";
 import TrailerPlayer from "../components/TrailerPlayer/TrailerPlayer";
 import { getData, updateData } from "../config/firebaseConfig";
 import DownloaderBtm from "../components/DownloaderBtm/DownloaderBtm";
+import SectionGroups from "../components/SectionGroups/SectionGroups";
 
 const Details = () => {
+  const {pathname} = useLocation()
   const usersdata = JSON.parse(sessionStorage.getItem("usersdata"));
   const { type, id } = useParams();
   const [data, setData] = useState([]);
@@ -74,7 +76,7 @@ const Details = () => {
       // setSavedData(await getData('bookmarked'))
     };
     getSavedData();
-  }, []);
+  }, [pathname || []]);
 
   const showTrailerPlayer = (choice, pos = 0) => {
     setShowTrailer(choice);
@@ -179,15 +181,11 @@ const Details = () => {
                     <button className="btn">
                       <h4>Watch now</h4>
                     </button>
-                    {seasons == null ||
-                      (data !== null && (
-                        <button
-                          className="relative-btn"
-                          onClick={handleDownload}
-                        >
-                          <h4>Download</h4>
-                        </button>
-                      ))}
+                    {type === "movie" && data !== null && (
+                      <button className="relative-btn" onClick={handleDownload}>
+                        <h4>Download</h4>
+                      </button>
+                    )}
                     <button className="relative-btn" onClick={handleSave}>
                       <i className="fa-regular fa-bookmark"></i>
                     </button>
@@ -197,7 +195,7 @@ const Details = () => {
             </div>
           </div>
           <div id="details-main-bg">
-            {seasons == null && (
+            {seasons && (
               <div className="datails-container" id="details-main-seasons">
                 <h4 className="underlined-text">Seasons</h4>
                 <Swiper
@@ -205,7 +203,7 @@ const Details = () => {
                   spaceBetween={10}
                   slidesPerView={"auto"}
                 >
-                  {seasons.map((season, i) => {
+                  {seasons?.map((season, i) => {
                     try {
                       return (
                         <SwiperSlide key={i}>
@@ -299,6 +297,12 @@ const Details = () => {
                 </div>
               </div>
             )}
+            <SectionGroups
+              name={"Similar"}
+              type={type}
+              mode="similar"
+              id={id}
+            />
           </div>
         </div>
       </div>

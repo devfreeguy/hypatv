@@ -43,6 +43,11 @@ const Header = () => {
     setRedZone(
       pathname.includes("/tv/details/") || pathname.includes("/movie/details/")
     );
+    if (JSON.parse(sessionStorage.getItem("usersdata")) !== null) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
   }, [pathname]);
 
   const getMenuStatus = () => {
@@ -57,7 +62,6 @@ const Header = () => {
   };
 
   const handleProfileClick = () => {
-    console.log(savedUserdata);
     if (sessionStorage.getItem("usersdata") === null) {
       navigate("/login");
     } else {
@@ -105,7 +109,7 @@ const Header = () => {
             </button>
           )}
         </div>
-        {actionCard && (
+        {actionCard && isLoggedIn && (
           <ActionCard
             close={() => {
               setActionCard(false);

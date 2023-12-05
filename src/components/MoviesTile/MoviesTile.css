@@ -24,7 +24,7 @@
 #movie-tile:hover .overlay {
   opacity: 1;
 }
-#movie-tile-data{
+#movie-tile-data {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -37,10 +37,9 @@
   border-radius: var(--border-radius);
 }
 
-#movie-tile-data h5{
+#movie-tile-data h5 {
   color: var(--accent-color);
 }
-
 
 .overlay {
   border-radius: var(--border-radius);
@@ -66,6 +65,7 @@
   position: relative;
   aspect-ratio: 2/3;
   transition: all 0.5s;
+  max-height: 300px;
   object-fit: cover;
 }
 
@@ -87,8 +87,8 @@
   transform: scale(1);
 }
 
-#big-movie-tile{
-  margin: .2rem;
+#big-movie-tile {
+  margin: 0.2rem;
 }
 
 #movie-tile-data {
@@ -106,8 +106,8 @@
   #big-movie-tile-image.big-movie-tile-small {
     width: 120px;
   }
-  
-#movie-tile.ordinary {
-  width: 130px;
-}
+
+  #movie-tile.ordinary {
+    width: 130px;
+  }
 }

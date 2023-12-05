@@ -5,8 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import tmdbAPI, { type, movieType, tvType } from "../../config/api";
 import "swiper/css";
 import { useNavigate } from "react-router-dom";
+import { shuffleArray } from "../../config/util";
 
-const SectionGroups = ({ name, type, category, mode = 'normal' }) => {
+const SectionGroups = ({ name = '', type = '', category = '', mode = 'normal', id = 0 }) => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
@@ -19,7 +20,7 @@ const SectionGroups = ({ name, type, category, mode = 'normal' }) => {
           const response = await tmdbAPI.getTvList(tvType[category], {
             params,
           });
-          setData(response.data.results);
+          setData(shuffleArray(response.data.results));
         } catch (e) {
           console.log(e);
         }
@@ -32,23 +33,34 @@ const SectionGroups = ({ name, type, category, mode = 'normal' }) => {
           const response = await tmdbAPI.getMoviesList(movieType[category], {
             params,
           });
-          setData(response.data.results);
+          setData(shuffleArray(response.data.results));
         } catch (e) {
           console.log(e);
         }
       };
       getMovies();
     }
-  } else {
+  } else if(mode === 'trending') {
       const getTrendingMovies = async () => {
         try {
           const response = await tmdbAPI.getTrendingList(type)
-          setData(response.data.results);
+          setData(shuffleArray(response.data.results));
         } catch (error) {
-          console.log(e);
+          console.log(error);
         }
       }
       getTrendingMovies();
+    }else if(mode === 'similar') {
+      const getSimilarMovies = async () => {
+        try {
+          const response = await tmdbAPI.similar(type, id)
+          setData(shuffleArray(response.data.results));
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      getSimilarMovies();
+
     }
   }, []);
 
@@ -60,16 +72,16 @@ const SectionGroups = ({ name, type, category, mode = 'normal' }) => {
     data.length > 0 && (
       <section
         id="section-group-tile"
-        className={mode === "relative" ? "card" : ""}
+        className={mode === "normal" ? "" : "card"}
       >
         <div id="section-group-header">
           <h3>{name.trim()}</h3>
-          <button
+          {mode == 'normal' && (<button
             onClick={handleSeeMore}
             className={`secondary-btn ${mode === "relative" ? "card" : ""}`}
           >
             See more
-          </button>
+          </button>)}
         </div>
         <div id="section-group-main">
           <Swiper grabCursor={true} spaceBetween={10} slidesPerView={"auto"}>

@@ -43,6 +43,7 @@ body {
   color: var(--accent-color);
   line-height: 1;
   height: 100vh;
+  transition: all .5s;
 }
 
 img {
@@ -129,10 +130,11 @@ main {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background: var(--light-dark-bg-color);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(8px);
 }
 
 .dialog-card {
@@ -167,6 +169,15 @@ main {
   50% {
     opacity: .5;
   }
+}
+
+.link-text {
+  color: var(--normal-color);
+  transition: color .3s;
+}
+
+.link-text:hover {
+  color: var(--primary-color);
 }
 /* ------------ */
 

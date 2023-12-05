@@ -6,7 +6,8 @@ import Dropdown from "../components/Dropdown/Dropdown";
 // import { useNavigate } from "react-router-dom";
 import "../styles/variables.css";
 import "../styles/Styles.css";
-import { tvCategory } from "../config/util";
+import { shuffleArray, tvCategory } from "../config/util";
+import SectionGroups from "../components/SectionGroups/SectionGroups"
 
 const TvSeries = () => {
   const [tvData, setTvData] = useState([]);
@@ -14,8 +15,16 @@ const TvSeries = () => {
     tvCategory ? tvCategory : "Popular"
   );
   const [currentPage, setCurrentPage] = useState(1);
+  const [trending, setTrending] = useState(false)
 
   // const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(()=>{
+      setTrending(true)
+    }, 5000)
+  }, [])
+  
 
   useEffect(() => {
     getTvSeries();
@@ -43,11 +52,12 @@ const TvSeries = () => {
       );
       const data = response.data.results;
       console.log(response.data.results);
-      setTvData([...tvData, ...data]);
+      setTvData([...tvData, ...shuffleArray(data)]);
     } catch (e) {
       console.log(e);
     }
   };
+  
 
   return (
     <section>
@@ -63,6 +73,12 @@ const TvSeries = () => {
             />
             <SearchBar />
           </div>
+          {trending && (<SectionGroups
+            name={"Recommended"}
+            category={currentCategory}
+            type={"tv"}
+            mode="trending"
+          />)}
           <div className="main-list-bg">
             {tvData?.map((tvItem) => {
               return <MoviesTile key={tvItem.id} data={tvItem} type="tv" />;

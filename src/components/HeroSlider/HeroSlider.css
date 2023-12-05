@@ -2,7 +2,7 @@
 
 #hero-slider-bg {
   width: 100vw;
-  height: 120vh;
+  height: 100vh;
   position: relative;
   max-height: 650px;
 }
@@ -28,10 +28,11 @@
 #hero-slider-welcome,
 #hero-slider-main {
   width: 100%;
-  padding-top: calc(var(--header-height) + 1rem);
+  margin-top: calc(var(--header-height) + 1rem);
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .hero-welcome-side {
@@ -148,6 +149,7 @@
 
   .hero-overlay {
     align-items: flex-end;
+    /* margin-bottom: 5rem; */
   }
 
   .hero-buttons.active {
@@ -156,7 +158,6 @@
 
   #hero-main-details {
     width: 100%;
-    margin-bottom: 5rem;
   }
 
   #hero-slider-welcome {

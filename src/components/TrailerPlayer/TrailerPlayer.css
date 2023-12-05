@@ -28,7 +28,7 @@
 }
 
 .trailer-player-close {
-  padding: var(--padding);
+  margin: var(--padding);
 }
 
 .trailer-player-iframe {

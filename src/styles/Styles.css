@@ -13,7 +13,7 @@
   justify-content: space-between;
   align-items: center;
   position: sticky;
-  padding-bottom: 1.5rem;
+  padding-bottom: .8rem;
   z-index: 10;
 }
 
@@ -28,6 +28,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: var(--small-gap);
+  padding-top: .8rem;
   /* height: 100%; */
   /* flex-grow: 1; */
   align-items: center;

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
-  const userid = sessionStorage.getItem("jhwviibibciussicvkv");
+  const userid = sessionStorage.getItem("usersdata").uid;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -29,33 +29,45 @@ const ProfileInfo = () => {
 
   const handleSubmit = async () => {
     event.preventDefault();
-    // reset();
-    usersdata.forEach((user) => {
-      if (user.username === username) {
-        setError("Username exist");
-      } else if (user.phone_no === phoneNo) {
-        setError("Sorry you cannot use this phone number");
-      } else {
-        setLoading(true);
-        saveData(
-          {
-            age,
-            country,
-            firstname: firstName,
-            lastname: lastName,
-            phone_no: phoneNo,
-            username,
-            uid: userid,
-            isEmailVerified: false,
-          },
-          "usersdata",
-          (response, error) => {
-            setLoading(false);
-            response ? navigate("/") : setError(error);
-          }
-        );
-      }
-    });
+
+    if (
+      firstName &&
+      lastName &&
+      username &&
+      phoneNo &&
+      country &&
+      countryPhoneCode &&
+      age
+    ) {
+      usersdata.forEach((user) => {
+        if (user.username === username) {
+          setError("Username exist");
+        } else if (user.phone_no === phoneNo) {
+          setError("Sorry you cannot use this phone number");
+        } else {
+          setLoading(true);
+          saveData(
+            {
+              age,
+              country,
+              firstname: firstName,
+              lastname: lastName,
+              phone_no: phoneNo,
+              username,
+              uid: userid,
+              isEmailVerified: false,
+            },
+            "usersdata",
+            (response, error) => {
+              setLoading(false);
+              response ? navigate("/") : setError(error);
+            }
+          );
+        }
+      });
+    }else{
+      setError('All feilds are required')
+    }
   };
 
   const getCountry = (name) => {

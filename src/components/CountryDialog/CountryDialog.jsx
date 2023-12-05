@@ -16,7 +16,7 @@ const CountryDialog = ({ getCountryData = () => {} }) => {
   const handleSearch = (value) => {
     setCountrySearch(value);
     setCountries(
-      value ? countries.filter((c) => c.name.includes(value)) : backup
+      value ? countries.filter((c) => c.name.toLowerCase().trim().includes(value.toLowerCase().trim())) : backup
     );
   };
 

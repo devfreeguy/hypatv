@@ -47,7 +47,7 @@ export const signup = async (email, password, proceed = () => {}) => {
           uid: credentials.user.uid,
         })
       );
-      ceed(true, "");
+      proceed(true, "");
     })
     .catch((err) => {
       proceed(false, err);
