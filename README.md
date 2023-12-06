@@ -13,3 +13,5 @@ Currently, two official plugins are available:
 Version 0.1.3
 
 Message - "Stable 0.1.3"
+
+Message - "Genral style css update | V0.1.3"

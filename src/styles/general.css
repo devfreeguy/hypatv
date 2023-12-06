@@ -29,6 +29,9 @@
   top: 0;
   left: 0;
   font-family: "Rubik", sans-serif;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
+  outline: none !important;
 }
 
 html {
