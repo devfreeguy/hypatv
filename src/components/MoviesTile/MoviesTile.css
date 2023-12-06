@@ -10,6 +10,7 @@
   align-items: center;
   gap: var(--small-gap);
   aspect-ratio: 2/3;
+  width: 100%;
 }
 
 #movie-tile.ordinary {
@@ -60,7 +61,6 @@
 }
 #big-movie-tile-image,
 #movie-tile-image {
-  width: 150px;
   border-radius: var(--border-radius);
   position: relative;
   aspect-ratio: 2/3;
@@ -108,6 +108,6 @@
   }
 
   #movie-tile.ordinary {
-    width: 130px;
+    /* width: 130px; */
   }
 }

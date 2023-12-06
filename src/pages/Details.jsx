@@ -1,7 +1,7 @@
 import tmdbAPI from "../config/api";
 import "../styles/Details.css";
 import "swiper/css";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apiConfig from "../config/apiconfg";
 import dateConverter from "../config/dateConverter";
@@ -15,8 +15,16 @@ import { getData, updateData } from "../config/firebaseConfig";
 import DownloaderBtm from "../components/DownloaderBtm/DownloaderBtm";
 import SectionGroups from "../components/SectionGroups/SectionGroups";
 
+  export let openMoreOption = false;
+
+  export const handleMenu = (choice = false) =>{
+    openMoreOption = choice;
+  }
+
+
 const Details = () => {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const usersdata = JSON.parse(sessionStorage.getItem("usersdata"));
   const { type, id } = useParams();
   const [data, setData] = useState([]);
@@ -78,6 +86,10 @@ const Details = () => {
     getSavedData();
   }, [pathname || []]);
 
+  // useEffect(()=>{
+  //   console.log(openMoreOption);
+  // },[])
+
   const showTrailerPlayer = (choice, pos = 0) => {
     setShowTrailer(choice);
     setTrailerPos(pos);
@@ -95,14 +107,14 @@ const Details = () => {
 
   return (
     <section id="details-section">
-      <div id="details-bg">
+      {/* <div id="details-bg"> */}
         <div id="details-main">
           <div className="details-hero" id="datails-hero-bg">
             <img
               src={apiConfig.w500Image(
                 data?.backdrop_path ? data?.backdrop_path : data?.poster_path
               )}
-              className="details-hero"
+              className="details-hero-img"
               id="details-hero-image"
             />
             <div
@@ -126,7 +138,13 @@ const Details = () => {
                   <span id="details-genre-list">
                     {genre?.map((genre) => {
                       return (
-                        <button key={genre.id} className="secondary-btn">
+                        <button
+                          key={genre.id}
+                          className="secondary-btn"
+                          onClick={() => {
+                            navigate(`/search/${genre.id}`);
+                          }}
+                        >
                           {genre.name}
                         </button>
                       );
@@ -186,9 +204,9 @@ const Details = () => {
                         <h4>Download</h4>
                       </button>
                     )}
-                    <button className="relative-btn" onClick={handleSave}>
+                    {/* <button className="relative-btn" onClick={handleSave}>
                       <i className="fa-regular fa-bookmark"></i>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
@@ -305,7 +323,7 @@ const Details = () => {
             />
           </div>
         </div>
-      </div>
+      {/* </div> */}
       {showTrailer && (
         <TrailerPlayer
           data={trailers}

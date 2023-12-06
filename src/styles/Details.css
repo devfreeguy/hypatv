@@ -3,24 +3,26 @@
 #details-section {
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
 
 #details-main {
   width: 100%;
-  position: relative;
+  /* position: relative; */
 }
 
 #details-hero-image {
-  width: 100vw;
+  width: 100%;
   object-fit: cover;
   display: flex;
-  height: 100vh;
-  /* position: absolute; */
+  height: 100%;
+  /* flex-grow: 1; */
+  position: absolute;
 }
 
 #details-bg {
   display: flex;
-  width: 100vw;
+  width: 100%;
 }
 
 #details-hero-bg {
@@ -29,8 +31,7 @@
   width: 100%;
   overflow: hidden;
   padding-top: var(--header-height);
-  position: relative;
-  height: 120vh;
+  /* position: relative; */
 }
 
 #details-hero-data-bg {
@@ -38,23 +39,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* height: 100vh; */
+  height: 100vh;
   background: linear-gradient(
     to bottom,
     var(--light-dark-bg-color),
     var(--bg-color)
-  );
-  min-height: 100vh;
-  height: 100%;
-}
-
-.details-hero {
-  min-height: 500px;
-  display: flex;
-  max-height: 70vh;
-  border-radius: 0;
-  align-items: center;
-  justify-content: center;
+    );
+  }
+  
+  .details-hero {
+    min-height: 100%;
+    display: flex;
+    border-radius: 0;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 #details-hero-poster {
@@ -71,6 +70,7 @@
   border-radius: var(--border-radius);
   background-position: bottom;
 }
+
 #details-hero-data {
   /* height: 100%; */
   display: flex;
@@ -112,6 +112,7 @@
   flex-direction: column;
   gap: var(--small-gap);
   justify-content: flex-end;
+  width: 50%;
 }
 
 #details-genre-list {
@@ -133,6 +134,7 @@
   padding: var(--padding);
   align-items: center;
   justify-content: center;
+  width: fit-content;
 }
 
 .details-bullets {
@@ -157,7 +159,7 @@
   width: 100%;
   padding: 1rem 2rem;
   gap: calc(var(--small-gap) * 4);
-  height: auto;
+  /* height: auto; */
 }
 
 #details-main-summary {
@@ -186,17 +188,22 @@
 }
 
 @media screen and (max-width: 710px) {
-  .details-hero {
-    max-height: 100vh;
-    align-items: flex-end;
-  }
-
+  
   #details-hero-data {
     display: flex;
     flex-direction: column;
     margin-top: calc(var(--header-height) + 1.5rem);
   }
 
+  #details-hero-data-bg {
+    height: min-content;
+  }
+
+  .details-hero {
+    min-height: 120vh;
+    align-items: flex-end;
+  }
+  
   #details-hero-data-info {
     width: 85%;
     align-items: center;
@@ -207,7 +214,7 @@
   }
 
   #details-main-bg {
-    /* margin-top: 3rem; */
+    margin-top: 3rem;
     padding: 0.5rem 1rem;
   }
 

@@ -15,6 +15,7 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
   background-blend-mode: darken;
+  /* padding: 0; */
 }
 
 .footer-overlay {
@@ -22,6 +23,7 @@ footer {
   flex-direction: column;
   background: linear-gradient(to bottom, var(--bg-color), rgba(0, 0, 0, 0.95));
   padding: var(--padding);
+  height: 10%;
 }
 
 .footer-grid {

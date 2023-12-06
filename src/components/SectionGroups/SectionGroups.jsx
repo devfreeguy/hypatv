@@ -89,7 +89,7 @@ const SectionGroups = ({ name = '', type = '', category = '', mode = 'normal', i
               try {
                 return (
                   <SwiperSlide key={itemData.id}>
-                    <MoviesTile data={itemData} type={type} />
+                    <MoviesTile data={itemData} type={type} from='groups' />
                   </SwiperSlide>
                 );
               } catch (error) {

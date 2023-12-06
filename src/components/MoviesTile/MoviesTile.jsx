@@ -5,7 +5,7 @@ import "./MoviesTile.css";
 import dateConverter from "../../config/dateConverter";
 import placeholder from "/images/backdrop.jpg";
 
-const MoviesTile = ({ data, type }) => {
+const MoviesTile = ({ data, type, from }) => {
   const navigate = useNavigate();
 
   const [image, setImage] = useState("./images/backdrop.jpg");
@@ -19,7 +19,13 @@ const MoviesTile = ({ data, type }) => {
   }, []);
 
   return (
-    <div id="movie-tile" className="ordinary" onClick={()=>{goToDetails()}}>
+    <div
+      id="movie-tile"
+      className={from && "ordinary"}
+      onClick={() => {
+        goToDetails();
+      }}
+    >
       <div id="movie-tile-main">
         <img
           src={image ? apiConfig.w500Image(image) : placeholder}

@@ -15,7 +15,7 @@ import Footer from "./components/Footer/Footer";
 import Documents from "./pages/Documents";
 import NoUserPrompt from "./components/NoUserPrompt/NoUserPrompt";
 import { savedUserdata } from "./config/config";
-// import './App.css'
+import './App.css'
 
 function App() {
   const { pathname } = useLocation();
@@ -46,6 +46,7 @@ function App() {
           <Route path="/movie" element={<Movies />} />
           <Route path="/:type" element={<Category />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/search/:genre.id" element={<Search withId={true} />} />
           <Route path="/:type/search/:keyword" element={<Category />} />
           <Route path="/:type/details/:id" element={<Details />} />
           <Route path="/login" element={<Auth />} />

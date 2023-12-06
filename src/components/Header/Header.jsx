@@ -5,6 +5,7 @@ import NavBar from "../NavBar/NavBar";
 import { useLocation, useNavigate } from "react-router-dom";
 import ActionCard from "../ActionCard/ActionCard";
 import { savedUserdata } from "../../config/config";
+import { handleMenu, openMoreOption } from "../../pages/Details";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -96,12 +97,16 @@ const Header = () => {
           {isLoggedIn ? (
             <div className="header-action-box">
               <i className="fa-solid fa-bookmark medium-icon secondary-btn"></i>
-              <img
-                src={profilePic}
-                alt="Profile"
-                id="profile"
-                onClick={handleProfileClick}
-              />
+              <i className="fa-solid fa-ellipsis-vertical medium-icon secondary-btn" onClick={()=>{handleMenu(!openMoreOption)}}></i>
+              {(!pathname.includes("/tv/details/") &&
+                !pathname.includes("/movie/details/")) && (
+                  <img
+                    src={profilePic}
+                    alt="Profile"
+                    id="profile"
+                    onClick={handleProfileClick}
+                  />
+                )}
             </div>
           ) : (
             <button className="secondary-btn" onClick={() => navigate("login")}>

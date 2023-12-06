@@ -7,7 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 
 
-const Search = () => {
+const Search = ({withId = false}) => {
   return (
     <div>
       <div className="main-genre-bg">
