@@ -1,4 +1,3 @@
-@import url(../../styles/variables.css);
 @import url(../../styles/animations.css);
 
 #section-group-tile {
@@ -43,4 +42,11 @@
 
 .swiper-slide {
   width: auto;
+}
+
+.section-children {
+  display: flex;
+  padding: var(--padding);
+  background: var(--bg-color);
+  border-radius: var(--button-radius);
 }

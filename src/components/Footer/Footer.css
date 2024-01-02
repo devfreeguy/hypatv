@@ -15,7 +15,6 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
   background-blend-mode: darken;
-  /* padding: 0; */
 }
 
 .footer-overlay {
@@ -23,7 +22,7 @@ footer {
   flex-direction: column;
   background: linear-gradient(to bottom, var(--bg-color), rgba(0, 0, 0, 0.95));
   padding: var(--padding);
-  height: 10%;
+  height: 105%;
 }
 
 .footer-grid {
@@ -35,9 +34,9 @@ footer {
 .footer-sections {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: var(--padding);
   gap: var(--small-gap);
+  height: 100%;
 }
 
 .footer-sections-header {
@@ -88,11 +87,13 @@ footer {
   padding: var(--padding);
 }
 
+@media screen and (max-width: 992px) {
+  .footer-copyright{
+    padding-bottom: 5rem;
+  }
+}
 
 @media screen and (max-width: 412px) {
-  /* .footer-sections:first-child{
-    width: 100vw;
-  } */
   .footer-sections, .footer-sections > * {
     align-items: center;
     text-align: center;

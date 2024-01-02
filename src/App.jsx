@@ -1,64 +1,125 @@
 import React, { Suspense, useEffect, useState } from "react";
-import SplashScreen from "./components/SplashScreen";
-import Home from "./pages/Home";
-import CoverPhoto from "./components/CoverPhoto/CoverPhoto";
-import Header from "./components/Header/Header";
-import Movies from "./pages/Movies";
-import Category from "./pages/Category";
-import Details from "./pages/Details";
-import TvSeries from "./pages/TvSeries";
-import Auth from "./pages/Auth";
 import { Route, Routes, useLocation } from "react-router-dom";
-import StatusPage from "./components/StatusPage/StatusPage";
-import Search from "./pages/Search";
-import Footer from "./components/Footer/Footer";
-import Documents from "./pages/Documents";
-import NoUserPrompt from "./components/NoUserPrompt/NoUserPrompt";
+import SplashScreen from "./components/SplashScreen";
+const Home = React.lazy(() => import("./pages/Home"));
+const CoverPhoto = React.lazy(() =>
+  import("./components/CoverPhoto/CoverPhoto")
+);
+const Header = React.lazy(() => import("./components/Header/Header"));
+const Movies = React.lazy(() => import("./pages/Movies"));
+const Category = React.lazy(() => import("./pages/Category"));
+// const Details = React.lazy(() => import("./pages/Details"));
+import Details from "./pages/Details";
+const TvSeries = React.lazy(() => import("./pages/TvSeries"));
+const Auth = React.lazy(() => import("./pages/Auth"));
+const StatusPage = React.lazy(() =>
+  import("./components/StatusPage/StatusPage")
+);
+const Search = React.lazy(() => import("./pages/Search"));
+const Footer = React.lazy(() => import("./components/Footer/Footer"));
+const Documents = React.lazy(() => import("./pages/Documents"));
+const NoUserPrompt = React.lazy(() =>
+  import("./components/NoUserPrompt/NoUserPrompt")
+);
+import NavBar from "./components/NavBar/NavBar";
 import { savedUserdata } from "./config/config";
-import './App.css'
+import "./App.css";
+import Genres from "./pages/Genres";
+import Discover from "./pages/Discover";
 
 function App() {
   const { pathname } = useLocation();
   const [showPrompt, setShowPrompt] = useState(false);
+  const [isAtTheTop, setIsAtTheTop] = useState(true);
+  // const [navBarRedZone, setNavBarRedZone] = useState(false);
+  const [headerRedZone, setHeaderRedZone] = useState(false);
 
   useEffect(() => {
-    if (savedUserdata === null) {
-      if (pathname !== "/") {
+    if (JSON.parse(sessionStorage.getItem("usersdata")) === null) {
+      if (pathname == "/login" || pathname == "/signup" || pathname == "/") {
+        setShowPrompt(false);
+      } else {
         setShowPrompt(true);
       }
-      if (pathname == "/login" || pathname == "/signup") {
-        setShowPrompt(false);
-      }
+    } else {
+      setShowPrompt(false);
     }
+
+    // setNavBarRedZone(
+    //   pathname.includes("/login") ||
+    //     pathname.includes("/signup") ||
+    //     pathname.includes("/more-info") ||
+    //     pathname.includes("/movie/details") ||
+    //     pathname.includes("/tv/details")
+    // );
+
+    setHeaderRedZone(
+      pathname.includes("/login") ||
+        pathname.includes("/signup") ||
+        pathname.includes("/more-info")
+    );
+    scrollToTop();
+  }, [pathname || []]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 100 ||
+        document.documentElement.scrollTop > 100
+      ) {
+        setIsAtTheTop(false);
+      } else {
+        setIsAtTheTop(true);
+      }
+    });
+  }, []);
+
+  const scrollToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, [pathname]);
+  };
 
   return (
     <>
       {showPrompt && <NoUserPrompt />}
-      <CoverPhoto />
+      {/* {pathname !== "/" && <CoverPhoto />} */}
       <Header />
-      <main>
-        <Suspense fallback={<SplashScreen show={true} />} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/tv" element={<TvSeries />} />
-          <Route path="/movie" element={<Movies />} />
-          <Route path="/:type" element={<Category />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/search/:genre.id" element={<Search withId={true} />} />
-          <Route path="/:type/search/:keyword" element={<Category />} />
-          <Route path="/:type/details/:id" element={<Details />} />
-          <Route path="/login" element={<Auth />} />
-          <Route path="/signup" element={<Auth />} />
-          <Route path="/more-info" element={<Auth />} />
-          <Route path="/status/:statusType" element={<StatusPage />} />
-          <Route path="/docs/privacy-policy" element={<Documents />} />
-          <Route path="/docs/disclaimer" element={<Documents />} />
-          <Route path="/docs/terms-of-service" element={<Documents />} />
-        </Routes>
-        <Footer />
+      <NavBar />
+      <main className={headerRedZone ? "active" : ""}>
+        <Suspense fallback={() => <SplashScreen />}>
+          <div id="main-bg">
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/tv" element={<TvSeries />} />
+              <Route path="/movie" element={<Movies />} />
+
+              <Route path="/search" element={<Search />} />
+              <Route path="/:type/search/:keyword" element={<Category />} />
+
+              <Route path="/signup" element={<Auth />} />
+              <Route path="/login" element={<Auth />} />
+              <Route path="/more-info" element={<Auth />} />
+              <Route path="/:type" element={<Category />} />
+              <Route path="/discover" element={<Discover />} />
+              <Route path="/discover/movies" element={<Discover />} />
+              <Route path="/discover/tv" element={<Discover />} />
+              <Route path="/discover/:type/genre/:id" element={<Discover />} />
+              <Route path="/:type/:id" element={<Details />} />
+              <Route path="/status/:statusType" element={<StatusPage />} />
+              <Route path="/docs/privacy-policy" element={<Documents />} />
+              <Route path="/docs/disclaimer" element={<Documents />} />
+              <Route path="/docs/terms-of-service" element={<Documents />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Suspense>
       </main>
+      <div
+        id="back-to-top"
+        onClick={scrollToTop}
+        className={!isAtTheTop && "active"}
+      >
+        <i className="fa-solid fa-angle-up"></i>
+      </div>
     </>
   );
 }

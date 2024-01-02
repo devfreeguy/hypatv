@@ -1,0 +1,49 @@
+.comment-tile-bg {
+  display: flex;
+  width: auto;
+  padding: var(--button-padding);
+  gap: var(--small-gap);
+}
+.comment-tile-bg.reply {
+  margin-left: 2rem;
+  width: calc(100% - 2rem);
+}
+
+.user-comment-profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.comment-tile-info-bg,
+.comment-tile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.comment-tile-card {
+  padding: 0.8rem;
+  border: solid 1px var(--line-color);
+  border-radius: var(--button-radius);
+}
+
+.user-comment-name {
+  cursor: pointer;
+}
+
+.comment-tile-action-bg {
+  display: flex;
+  gap: 8px;
+}
+
+.comment-tile-action {
+  padding-top: 10px;
+  transition: color 0.5s;
+  color: var(--sub-text-color);
+  cursor: pointer;
+}
+
+.comment-tile-action:hover {
+  color: var(--normal-color);
+}

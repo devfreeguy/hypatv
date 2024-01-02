@@ -1,0 +1,51 @@
+@import url(../../styles/animations.css);
+
+#bottom-nav-others {
+  align-items: flex-end;
+}
+
+@media screen and (min-width: 576px) {
+  #bottom-nav-others {
+    display: none;
+  }
+}
+
+.bottom-nav-bg {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--bg-color);
+  height: fit-content;
+  bottom: 0;
+  padding: var(--padding);
+  padding: 1.5rem 0.5rem;
+  border-radius: 12px 12px 0 0;
+  place-items: center;
+  gap: var(--small-gap);
+  animation: bottomNavSlide 0.5s;
+}
+
+.other-bottom-nav {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: var(--small-gap);
+}
+
+.other-nav-tile {
+  display: flex;
+  width: 100%;
+  gap: var(--small-gap);
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: var(--button-radius);
+  background: var(--secondary-bg-color);
+}
+
+.other-nav-tile:hover {
+  background: var(--card-color);
+}
+
+.bottom-nav-dismiss {
+  width: 80%;
+}

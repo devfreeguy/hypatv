@@ -4,20 +4,25 @@
 header {
   display: flex;
   height: var(--header-height);
-  width: 100%;
+  width: calc(100% - var(--sidebar-width));
   position: fixed;
-  z-index: 89;
-  transition: background .1s;
+  z-index: 40;
+  transition: all .4s;
+  margin-left: var(--sidebar-width);
+  backdrop-filter: blur(10px);
 }
 header.shrink {
-  background-color: var(--bg-color);
+  background-color: var(--light-dark-bg-color);
 }
 
 #container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+  margin: 0 3vw;
+  width: 100%;
+  /* margin-left: 1rem; */
+  /* width: 95%; */
 }
 
 header div {
@@ -31,10 +36,11 @@ header div {
 }
 
 #header-logo {
-  width: calc(var(--header-logo-width) * 1.1);
+  width: calc(var(--header-height) /1.5);
   margin: 0;
   object-fit: contain;
   background: none;
+  visibility: hidden;
 }
 
 #profile {
@@ -53,4 +59,15 @@ header div {
 #profile:hover {
   scale: 1.05;
   /* border: solid 2px var(--primary-color); */
+}
+
+@media screen and (max-width: 560px ){
+  header {
+    width: 100%;
+    margin: 0;
+  }
+
+  #header-logo {
+    visibility: visible;
+  }
 }

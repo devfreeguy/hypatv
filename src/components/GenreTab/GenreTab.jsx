@@ -3,12 +3,15 @@ import "./GenreTab.css";
 import tmdbAPI from "../../config/api";
 import GenreTile from "../GenreTile/GenreTile";
 
-const GenreTab = ({ direction }) => {
+const GenreTab = ({ direction, type }) => {
   const [genresData, setGenresData] = useState([]);
 
   useEffect(() => {
     const getGenres = async () => {
-      const response = await tmdbAPI.getMoviesGenre();
+     
+      const response = type === 'tv' ? await tmdbAPI.getTvGenre()
+      :await tmdbAPI.getMoviesGenre()
+      ;
       setGenresData(response.data["genres"]);
     };
     getGenres();

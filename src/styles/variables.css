@@ -14,25 +14,20 @@ Table of context
 
 :root {
   /* Colors */
-  --primary-color: #e11a38;
-  /* --primary-color: #5873ff; */
+  --primary-color: #ed1C24;
   --accent-color: #e3f2fd;
   --color-highlight: #798086;
-  /* --color-highlight: #90caf9; */
   --normal-color: #f54242;
-  /* --bg-color: #090c1d; */
   --bg-color: #0b0b0c;
-  /* --bg-color: #121212; */
   --secondary-bg-color: #141416;
-  /* --secondary-bg-color: #0d1228; */
-  /* --card-color: #0f1115; */
   --card-color: #242428;
-  --white-color: #fff;
-  /* --text-color: #a0abbe; */
+  --dark-card-color: #101011;
+  --white-color: #ebebeb;
   --text-color: #d4c6c6;
   --sub-text-color: #b3bcca;
   --line-color: #423f3f;
-  --warning-color: rgb(255, 217, 0);
+  --sub-line-color: #222121;
+  --warning-color: #ffd900;
   --warning-bg-color: rgb(61, 42, 0);
   --filter-tab-bg-color: rgba(88, 115, 255, 0.3);
   --light-dark-bg-color: rgba(0, 0, 0, 0.7);
@@ -71,7 +66,7 @@ Table of context
   --large-font-size: clamp(.7rem, 4vw, 1rem);
   --medium-font-size: clamp(0.5rem, 2.5vw, 0.8rem);
   --normal-font-size: clamp(0.5rem, 1vw, 1.5rem);
-  --small-font-size: clamp(0.2rem, 1vw, 0.5rem);
+  --small-font-size: clamp(0.4rem, 1vw, 0.7rem);
 
   /* Icon size */
   /* --small-icon: clamp(0.6rem, 3vw, 1rem);
@@ -93,8 +88,10 @@ Table of context
   /* Tab nav height */
   --nav-height: 2rem;
 
-  /* Height */
+  /* Custom sizes */
   --header-height: clamp(4.5rem, 10vw, 5.5rem);
+  --sidebar-width: 90px;
+  --open-sidebar-width: 250px;
 }
 
 @media screen and (max-width: 768px) {

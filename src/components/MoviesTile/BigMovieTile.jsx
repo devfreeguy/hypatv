@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MoviesTile.css";
-import apiConfig from "../../config/apiconfg"
-import placeholder from "/images/backdrop.jpg";
+import apiConfig from "../../config/apiconfg";
+import placeholder from "/images/placeholder.jpg";
 
 const BigMovieTile = ({ size, data }) => {
   const [image, setImage] = useState();
@@ -12,12 +12,12 @@ const BigMovieTile = ({ size, data }) => {
   }, []);
 
   useEffect(() => {
-    setIsActive(true)
+    setIsActive(true);
   }, []);
 
-  return (
-    <div id="movie-tile">
-      <div id="big-movie-tile">
+  return data !== null ? (
+    <div id="big-movie-tile">
+      <div id="movie-tile" className="movie-tile">
         <div id="movie-tile-main">
           <img
             src={image ? apiConfig.w500Image(image) : placeholder}
@@ -32,6 +32,8 @@ const BigMovieTile = ({ size, data }) => {
         </div>
       </div>
     </div>
+  ) : (
+    <div className="shimmer-bg movie-tile" id="big-movie-tile"></div>
   );
 };
 

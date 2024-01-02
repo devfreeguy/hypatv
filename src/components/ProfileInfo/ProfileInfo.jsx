@@ -78,7 +78,7 @@ const ProfileInfo = () => {
   return (
     <>
       {loading && <Loading />}
-      <div className="profile-info-card dialog-card">
+      <div className="profile-info-card auth-card-bg">
         <h2 className="profile-info-top-text">More informations</h2>
         <h4 className="profile-info-sub-text sub-text">
           These are needed to setup your profile
@@ -87,7 +87,7 @@ const ProfileInfo = () => {
         {error && <h5 className="error-text">{error}</h5>}
         <form className="dialog-form">
           <label htmlFor="auth-first-name">
-            <span className="auth-input-feilds secondary-btn">
+            <span className="auth-input-feilds">
               <i className="fa-duotone fa-user normal-icon"></i>
               <input
                 type="text"
@@ -104,7 +104,7 @@ const ProfileInfo = () => {
           </label>
 
           <label htmlFor="auth-lastname">
-            <span className="auth-input-feilds secondary-btn">
+            <span className="auth-input-feilds">
               <i className="fa-duotone fa-user normal-icon"></i>
               <input
                 type="text"
@@ -121,7 +121,7 @@ const ProfileInfo = () => {
           </label>
 
           <label htmlFor="auth-username">
-            <span className="auth-input-feilds secondary-btn">
+            <span className="auth-input-feilds">
               <i className="fa-duotone fa-user normal-icon"></i>
               <input
                 type="text"
@@ -138,7 +138,7 @@ const ProfileInfo = () => {
           </label>
 
           <label htmlFor="auth-age">
-            <span className="auth-input-feilds secondary-btn">
+            <span className="auth-input-feilds">
               <i className="fa-duotone fa-input-numeric normal-icon"></i>
               <input
                 type="number"
@@ -162,7 +162,7 @@ const ProfileInfo = () => {
               }}
             >
               <span
-                className="auth-input-feilds secondary-btn"
+                className="auth-input-feilds"
                 onClick={() => {
                   setShowCountryPicker(true);
                 }}
@@ -191,7 +191,7 @@ const ProfileInfo = () => {
           )}
 
           <label htmlFor="auth-phone-no">
-            <span className="auth-input-feilds secondary-btn">
+            <span className="auth-input-feilds">
               <i className="fa-duotone fa-phone normal-icon"></i>
               {countryPhoneCode && (
                 <input

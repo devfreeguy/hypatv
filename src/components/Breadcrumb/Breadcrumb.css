@@ -1,0 +1,34 @@
+#breadcrumb {
+  display: flex;
+  padding: var(--medium-button-padding);
+  background: var(--secondary-bg-color);
+  border-radius: 10rem;
+  gap: 4px;
+  padding: 6px;
+}
+
+.path-holder {
+  display: flex;
+  place-items: center;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 10rem;
+  cursor: pointer;
+}
+
+.breadcrumbs:hover {
+  background: var(--card-color);
+}
+
+.breadcrumbs.is-last {
+  opacity: .5;
+}
+
+.breadcrumbs.is-last:hover {
+  background: none;
+}

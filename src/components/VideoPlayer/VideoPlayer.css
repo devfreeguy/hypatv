@@ -1,0 +1,12 @@
+#custom-player-bg{
+  width: 100%;
+  background-color: var(--card-color);
+  aspect-ratio: 16/9;
+  border-radius: var(--button-radius);
+}
+
+
+#custom-player-thumbnail{
+  object-fit: cover;
+  width: auto;
+}

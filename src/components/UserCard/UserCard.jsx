@@ -6,14 +6,6 @@ const UserCard = ({ data, type }) => {
   return (
     <div
       className="user-card"
-      style={
-        {
-          // backgroundImage: `url(${apiConfig.w500Image(data.profile_path)})`,
-          // backdropFilter: `blur(10px)`,
-          // backgroundPosition: `center`,
-          // objectFit: co
-        }
-      }
     >
       <img
         src={

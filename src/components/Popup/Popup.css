@@ -1,0 +1,48 @@
+@import url(../../styles/animations.css);
+
+#popup-message {
+  width: 80%;
+  background: var(--card-color);
+  padding: var(--button-padding);
+  border-radius: var(--button-radius);
+  position: fixed;
+  bottom: 0;
+  top: auto;
+  left: 0;
+  right: 0;
+  margin: 3rem auto;
+  max-width: 400px;
+  animation: popupAnimation .5s;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--small-gap);
+  z-index: 55;
+
+  @media screen and (max-width: 992px) {
+    margin-bottom: 5rem;
+  }
+}
+
+#popup-message.close{
+  animation: popupCloseAnimation .5s;
+  display: none;
+}
+
+.popup-message-top {
+  display: flex;
+  place-items: center;
+  width: 100%;
+  justify-content: space-between;
+  height: 2rem;
+}
+
+.popup-full-message {
+  display: none;
+  padding: var(--button-padding);
+  background: var(--bg-color);
+  border-radius: var(--button-radius);
+  transition: all .5s;
+}
+.popup-fullf-message.open {
+  display: block;
+}

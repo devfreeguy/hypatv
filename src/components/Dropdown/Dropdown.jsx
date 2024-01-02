@@ -22,13 +22,16 @@ const Dropdown = ({ type, category, update = ()=>{} }) => {
     setSelected("Popular")
   },[type])
 
+  // window.addEventListener('click', ()=> handleDropdown);
+
   return (
     <div className="dropdown-bg">
       <button className="flex-outlined-btn" onClick={handleDropdown}>
-        <h5 className="sub-text">{selected}</h5>
+        <h6 className="sub-text">{selected}</h6>
         <i className="fa-solid fa-angle-down small-icon"></i>
       </button>
       <span className={`dropdown ${isOpen ? "active" : ""}`}>
+        
         {options[type].map((item) => {
           return (
             <li
@@ -39,20 +42,21 @@ const Dropdown = ({ type, category, update = ()=>{} }) => {
                   handleDropdown()
                 }else {
                   setSelected(item);
-                  // selectOption();
+                  handleDropdown()
                 }
               }}
             >
-              <h4
+              <h6
                 className={`single-line-text ${
                   selected === item ? "active" : ""
                 }`}
               >
                 {item}
-              </h4>
+              </h6>
             </li>
           );
         })}
+        
       </span>
     </div>
   );

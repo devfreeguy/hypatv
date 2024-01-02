@@ -2,10 +2,11 @@
 
 .no-user-prompt-bg {
   z-index: 100000000;
+  display: flex;
 }
 
 .no-user-prompt-card {
-  max-width: 50%;
+  max-width: 700px;
   padding: 0;
   height: 450px;
   justify-content: flex-start;
@@ -41,7 +42,7 @@
   background-color: rgba(0, 0, 0, 0.87);
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   /* text-align: center; */
   padding: 3rem;
   flex-direction: column;
@@ -63,9 +64,28 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 756px) {
+@media screen and (max-width: 992px) {
+  .no-user-prompt-card {
+    max-width: 70%;
+    height: 400px;
+  }
+  
+}
+
+@media screen and (max-width: 768px) {
+  .no-user-prompt-card {
+    max-width: 80%;
+  }
+}
+
+@media screen and (max-width: 576px) {
   .no-user-prompt-card {
     max-width: 90%;
-    height: 400px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .no-user-prompt-card {
+    max-width: 95%;
   }
 }

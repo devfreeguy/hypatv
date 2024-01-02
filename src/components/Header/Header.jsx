@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/logo.png";
+import logo from "/images/logo.png";
 import "./Header.css";
-import NavBar from "../NavBar/NavBar";
 import { useLocation, useNavigate } from "react-router-dom";
 import ActionCard from "../ActionCard/ActionCard";
-import { savedUserdata } from "../../config/config";
-import { handleMenu, openMoreOption } from "../../pages/Details";
+import SearchBar from "../SearchBar/SearchBar";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
 
 const Header = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [openMenu, setOpenMenu] = useState(false);
   const [profilePic, setProfilePic] = useState("/images/profile.png");
   const [displayHeader, setDisplayHeader] = useState(false);
   const [redZone, setRedZone] = useState(false);
@@ -21,8 +20,8 @@ const Header = () => {
   useEffect(() => {
     const shrinkheader = () => {
       if (
-        document.body.scrollTop > 100 ||
-        document.documentElement.scrollTop > 100
+        document.body.scrollTop > 10 ||
+        document.documentElement.scrollTop > 10
       ) {
         setScrollEffect("shrink");
       } else {
@@ -51,6 +50,10 @@ const Header = () => {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    setRedZone(redZone);
+  }, [redZone]);
+
   const getMenuStatus = () => {
     setOpenMenu(!openMenu);
   };
@@ -73,46 +76,36 @@ const Header = () => {
   if (displayHeader) {
     return (
       <header className={scrollEffect != "" ? "shrink" : ""}>
-        <div className="container" id="container">
+        <div className="containerf" id="container">
           <div id="HeaderAction">
-            {!redZone && (
-              <i
-                className={`fa-solid ${
-                  openMenu ? "fa-close" : "fa-bars"
-                } normal-icon mobile-props`}
-                onClick={getMenuStatus}
-              ></i>
-            )}
             {redZone && (
               <i
-                className="fa-solid fa-arrow-left normal-icon secondary-btn"
+                className="fa-solid fa-arrow-left normal-icon relative-btn"
                 onClick={goBack}
               ></i>
             )}
-            {!redZone && <img src={Logo} alt="HypaTv" id="header-logo" />}
+            {/* <img src={logo} alt="HypaTv" id="header-logo" /> */}
+            <Breadcrumb />
           </div>
 
-          {!redZone && <NavBar toggle={openMenu} setToggle={getMenuStatus} />}
-
-          {isLoggedIn ? (
-            <div className="header-action-box">
-              <i className="fa-solid fa-bookmark medium-icon secondary-btn"></i>
-              <i className="fa-solid fa-ellipsis-vertical medium-icon secondary-btn" onClick={()=>{handleMenu(!openMoreOption)}}></i>
-              {(!pathname.includes("/tv/details/") &&
-                !pathname.includes("/movie/details/")) && (
-                  <img
-                    src={profilePic}
-                    alt="Profile"
-                    id="profile"
-                    onClick={handleProfileClick}
-                  />
-                )}
-            </div>
-          ) : (
-            <button className="secondary-btn" onClick={() => navigate("login")}>
-              <h4>Sign in</h4>
-            </button>
-          )}
+          <div className="header-action-box">
+            {!pathname.includes("/search") && <SearchBar />}
+            {isLoggedIn ? (
+              <img
+                src={profilePic}
+                alt="Profile"
+                id="profile"
+                onClick={handleProfileClick}
+              />
+            ) : (
+              <button
+                className="relative-btn"
+                onClick={() => navigate("login")}
+              >
+                <p>Sign in</p>
+              </button>
+            )}
+          </div>
         </div>
         {actionCard && isLoggedIn && (
           <ActionCard

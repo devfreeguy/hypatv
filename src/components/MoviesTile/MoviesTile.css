@@ -1,6 +1,6 @@
 @import url(../../styles/variables.css);
 
-#movie-tile {
+.movie-tile {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -13,7 +13,7 @@
   width: 100%;
 }
 
-#movie-tile.ordinary {
+.movie-tile.ordinary {
   width: 150px;
 }
 
@@ -22,7 +22,7 @@
   flex-direction: column;
   position: relative;
 }
-#movie-tile:hover .overlay {
+.movie-tile:hover .overlay {
   opacity: 1;
 }
 #movie-tile-data {
@@ -43,7 +43,6 @@
 }
 
 .overlay {
-  border-radius: var(--border-radius);
   position: absolute;
   height: 100%;
   width: 100%;
@@ -61,12 +60,11 @@
 }
 #big-movie-tile-image,
 #movie-tile-image {
-  border-radius: var(--border-radius);
   position: relative;
-  aspect-ratio: 2/3;
   transition: all 0.5s;
-  max-height: 300px;
+  max-height: 100%;
   object-fit: cover;
+  aspect-ratio: 2/3;
 }
 
 #big-movie-tile-image {
@@ -99,15 +97,23 @@
   gap: var(--small-gap);
 }
 
-@media screen and (max-width: 556px) {
+@media screen and (max-width: 768px) {
   #big-movie-tile-image {
     width: 150px;
+  }
+
+}
+
+
+@media screen and (max-width: 556px) {
+  #big-movie-tile-image {
+    width: 120px;
   }
   #big-movie-tile-image.big-movie-tile-small {
     width: 120px;
   }
 
   #movie-tile.ordinary {
-    /* width: 130px; */
+    width: 140px;
   }
 }

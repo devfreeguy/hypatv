@@ -10,20 +10,19 @@
 }
 
 .genre-tile {
+  background: var(--secondary-bg-color);
   display: flex;
-  background: var(--bg-color);
-  padding: 1rem;
+  padding: 1rem 1.2rem;
   gap: var(--small-gap);
   align-items: center;
   border-radius: var(--button-radius);
-  border: solid 1px var(--line-color)
 }
 .genre-tile.small {
   padding: .5rem .7rem;
 }
 
 .genre-tile:hover {
-  background: var(--secondary-bg-color)
+  background: var(--card-color);
 }
 
 .genre-icon {

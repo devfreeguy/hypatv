@@ -1,0 +1,25 @@
+#pager {
+  width: 100%;
+  display: flex;
+  place-content: center;
+  gap: var(--small-gap);
+  padding: var(--padding);
+}
+
+.pager-btn {
+  padding: var(--padding);
+  cursor: pointer;
+}
+
+.pager-btn:hover {
+  background-color: var(--primary-color);
+}
+
+.pager-btn:hover > * {
+  color: white;
+}
+
+.page-number.btn {
+  color: white;
+  font-weight: 600;
+}

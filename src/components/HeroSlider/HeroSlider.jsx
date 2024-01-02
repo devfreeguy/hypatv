@@ -8,52 +8,74 @@ import { useNavigate } from "react-router-dom";
 import "./HeroSlider.css";
 import "swiper/css";
 import { shuffleArray } from "../../config/util";
+import { roundUpNumber } from "../../config/config";
 
 const HeroSlider = () => {
   const navigate = useNavigate();
   const [animateIn, setAnimateIn] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [heroMovies, setHeroMovie] = useState([]);
-  const [welcomeMovies, setWelcomeMovie] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [genres, setGenres] = useState([]);
+
+  const updateIndex = (pos) => {
+    const currentSlide = currentIndex == heroMovies.length - 1 ? 0 : pos;
+    setCurrentIndex(currentSlide);
+  };
 
   useEffect(() => {
-    const getMovies = async () => {
+    (async () => {
       const params = { page: 1 };
+
       try {
-        const response = await tmdbAPI.getMoviesList(movieType.popular, {
+        const movieResponse = await tmdbAPI.getMoviesList(movieType.popular, {
           params,
         });
-        const data = response.data.results;
-        setHeroMovie(shuffleArray(data.slice(0, 8)));
-        setWelcomeMovie(shuffleArray(data.slice(0, 3)));
+
+        const movieData = movieResponse.data.results
+          .slice(0, 10)
+          .map((movie) => (movie = { ...movie, type: "movie" }));
+
+        const tvResponse = await tmdbAPI.getTvList(tvType.popular, {
+          params,
+        });
+
+        const tvData = tvResponse.data.results
+          .slice(0, 10)
+          .map((tv) => (tv = { ...tv, type: "tv" }));
+
+        const tvGenresResponse = await tmdbAPI.getGenre("tv");
+        const movieGenresResponse = await tmdbAPI.getGenre("movie");
+
+        const genresResponse = [
+          ...tvGenresResponse.data.genres.map(
+            (genre) => (genre = { ...genre, type: "tv" })
+          ),
+          ...movieGenresResponse.data.genres.map(
+            (genre) => (genre = { ...genre, type: "movie" })
+          ),
+        ];
+
+        setGenres(genresResponse);
+
+        setHeroMovie(shuffleArray([...heroMovies, ...movieData, ...tvData]));
       } catch (e) {
         console.log(e);
       }
-    };
-    getMovies();
+    })();
 
     const user = sessionStorage.getItem("usersdata");
+
     user ? setIsLoggedIn(true) : setIsLoggedIn(false);
   }, []);
 
-  // const goToDetails = (id) => {
-  //   navigate(`/movie/${id}`);
-  // };
-
-  const animate = () => {
-    setAnimateIn(true);
-  };
-  useEffect(() => {
-    animate();
-  }, []);
-
   return (
-    <section>
-      {isLoggedIn ? (
+    <section id="hero-section">
+      {heroMovies ? (
         <Swiper
           grabCursor={true}
           centeredSlides={true}
-          loop={true}
+          // loop={true}
           slidesPerView={"1"}
           autoplay={{
             delay: 8000,
@@ -62,14 +84,19 @@ const HeroSlider = () => {
           pagination={false}
           navigation={false}
           modules={[Autoplay, Pagination, Navigation]}
-          onSlideChange={() => animate()}
-          onSwiper={(swiper) => animate()}
+          onRealIndexChange={(e) => {
+            updateIndex(e.realIndex);
+          }}
         >
-          {heroMovies.map((movie) => {
+          {heroMovies.map((movie, i) => {
             try {
               return (
-                <SwiperSlide key={movie.id}>
-                  <HeroSlide data={movie} animateIn={animateIn} />
+                <SwiperSlide key={i}>
+                  <HeroSlide
+                    data={movie}
+                    animation={currentIndex === i}
+                    genres={genres}
+                  />
                 </SwiperSlide>
               );
             } catch (error) {
@@ -78,117 +105,114 @@ const HeroSlider = () => {
           })}
         </Swiper>
       ) : (
-        <div id="hero-slider-bg">
-          <img
-            src="./images/movie-poster-collage.jpg"
-            className="hero-slider-img"
-          />
-          <div className="hero-overlay">
-            <div id="hero-slider-welcome">
-              <div className="hero-welcome-side">
-                <div className="hero-side-details" id="hero-welcome-details">
-                  <h1 className={` ${animateIn ? "active" : ""}`}>
-                    Unlimited Movies and Tv series
-                  </h1>
-                  <h3 className={`sub-text ${animateIn ? "active" : ""}`}>
-                    Welcome to the world of Entertainment. Where you can get all
-                    Movies and Tv series for free and download is available in
-                    all formats.
-                    <br />
-                    Proceed to sign in if you have an account, else sign up to
-                    create a new account
-                  </h3>
-                  <div
-                    id="hero-welcome-buttons"
-                    className={`hero-buttons ${animateIn ? "active" : ""}`}
-                  >
-                    <button className="btn" onClick={() => navigate("/signup")}>
-                      <h4>Create an account</h4>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="hero-welcome-side"
-                onClick={() => navigate("login")}
-              >
-                {welcomeMovies.map((series, i) => {
-                  if (i === 1) {
-                    return (
-                      <BigMovieTile
-                        size="large"
-                        isActive={animateIn ? "active" : ""}
-                        key={series.id}
-                        data={series}
-                      />
-                    );
-                  } else {
-                    return (
-                      <BigMovieTile
-                        size="small"
-                        isActive={animateIn ? "active" : ""}
-                        key={series.id}
-                        data={series}
-                      />
-                    );
-                  }
-                })}
-              </div>
-            </div>
+        <>
+          <HeroSlide shimmer={true} />
+          <div id="hero-login-banner">
+            <h3 className="hero-login-header-text">
+              Unlimited Movies and Tv series
+            </h3>
+            <p className="hero-login-sub-text">
+              Welcome to the world of Entertainment. Where you can get all
+              Movies and Tv series for free
+            </p>
+            <button
+              className="hero-buttons btn"
+              onClick={() => navigate("/signup")}
+            >
+              <h5>Create an account</h5>
+            </button>
           </div>
-        </div>
+        </>
       )}
     </section>
   );
 };
 
-const HeroSlide = ({ data, animateIn }) => {
+const HeroSlide = ({ shimmer = false, data, animation = false, genres }) => {
   const navigate = useNavigate();
 
-  const goToDetails = (id) => {
+  const goToDetails = (id, type) => {
     console.log("going");
-    navigate(`/movie/details/${id}`);
+    navigate(`/${type}/${id}`);
+  };
+
+  const getGenreName = (id) => {
+    genres.map((genre) => {
+      if (genre.type === type && genre.id === id) return genre.name;
+    });
   };
 
   return (
     <div id="hero-slider-bg">
-      <img
-        src={apiConfig.originalImage(
-          data?.backdrop_path ? data?.backdrop_path : data?.poster_path
-        )}
-        className="hero-slider-img"
-      />
-      <div className="hero-overlay">
-        <div id="hero-slider-main">
-          <div id="hero-main-poster">
-            <BigMovieTile size={"large"} data={data} />
-          </div>
-          <div className="hero-main-side">
-            <div id="hero-main-details" className="hero-side-details">
-              <h1 className={` ${animateIn ? "active" : ""}`}>{data.title}</h1>
-              <h3 className={`sub-text ${animateIn ? "active" : ""}`}>
-                {data.overview}
-              </h3>
-              <div className={`hero-buttons ${animateIn ? "active" : ""}`}>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    goToDetails(data.id);
-                  }}
+      {shimmer ? (
+        <>
+          <span className="hero-slider-img shimmer"></span>
+        </>
+      ) : (
+        <>
+          <img
+            src={apiConfig.originalImage(
+              data.backdrop_path ? data.backdrop_path : data.poster_path
+            )}
+            className="hero-slider-img"
+          />
+          <div className="hero-overlay">
+            <div
+              id="hero-slider-main"
+              onClick={() => {
+                goToDetails(data.id, data.type);
+              }}
+            >
+              <div id="hero-details">
+                <h1
+                  className={`hero-movie-title slide-in-animation ${
+                    animation ? "active" : ""
+                  }`}
                 >
-                  <h4>Watch now</h4>
+                  {data.title ? data.title : data.name}
+                </h1>
+
+                <div
+                  className={`hero-meta-data slide-in-animation ${
+                    animation ? "active" : ""
+                  }`}
+                >
+                  <span className="hero-data-rating-bg">
+                    <i className="fa-solid fa-star warning-text small-icon"></i>
+                    {roundUpNumber(1, data.vote_average)}
+                  </span>
+                  {data.genre_ids.map((genreId, i) => {
+                    return (
+                      <span key={i} className="hero-data-rating-bg">
+                        {getGenreName(genreId)}
+                      </span>
+                    );
+                  })}
+                </div>
+
+                {data.overview && (
+                  <h3
+                    className={`hero-overview-text slide-in-animation sub-text single-line-text ${
+                      animation ? "active" : ""
+                    }`}
+                  >
+                    {data.overview}
+                  </h3>
+                )}
+                <button className="hero-buttons btn">
+                  <h5>More details</h5>
                 </button>
-                <button className="relative-btn">
-                  <h4>Watch trailer</h4>
-                </button>
-                {/* <button className="secondary-btn">
-                  <i className="fa-solid fa-download normal-icon"></i>
-                </button> */}
+              </div>
+              <div
+                id={`hero-main-poster`}
+                className={` pop-up-animation ${animation ? "active" : ""}`}
+              >
+                <BigMovieTile size={""} data={data} />
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

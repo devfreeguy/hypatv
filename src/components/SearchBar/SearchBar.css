@@ -1,22 +1,28 @@
-@import url(../../styles/variables.css);
-
-/* .search-box {
+.search-box {
   display: flex;
-  padding: 0.8rem 1rem;
-  margin: 0.5rem 1rem;
-  background: var(--background-color);
-  align-items: center;
-  gap: 8px;
-  border-radius: 1rem;
-  border: solid 1px var(--line-color);
-} */
-
-.search-bar {
-  width: clamp(7rem, 15vw, 10rem);
-  border: none;
+  margin: 0;
+  cursor: pointer;
+  background: var(--secondary-bg-color);
 }
 
-.search-box  form{
+.search {
+}
+
+form.search-box {
   display: flex;
   gap: var(--small-gap);
+}
+
+form.search-box .search.active{
+  /* width: clamp(7rem, 15vw, 10rem); */
+  width: 80%;
+  max-width: 500px;
+}
+
+@media screen and (max-width: 768px) {
+  /*-==========- Tablet screens -==========*/
+  .search {
+    width: fit-content;
+    display: none;
+  }
 }

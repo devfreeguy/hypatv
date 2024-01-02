@@ -17,36 +17,36 @@
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes loadingAnimation {
   0% {
-    opacity: .6;
+    opacity: 0.6;
     scale: 1;
   }
-  
+
   50% {
     opacity: 1;
-    scale: .98;
+    scale: 0.98;
   }
-  
+
   100% {
-    opacity: .6;
+    opacity: 0.6;
     scale: 1;
   }
 }
@@ -56,7 +56,7 @@
     opacity: 0;
     /* transform: opacity(1); */
   }
-  
+
   100% {
     opacity: 1;
     /* transform: opacity(0); */
@@ -64,17 +64,113 @@
   }
 }
 
-
 @keyframes expandHeight {
-  0%{
+  0% {
     height: 0;
     opacity: 0;
   }
-  40%{
+  40% {
     height: 50%;
   }
-  100%{
+  100% {
     height: initial;
     opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+  80% {
+    opacity: 0.7;
+    scale: 0.95;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes scrollToTopPopOut {
+  0% {
+    transform: translateX(100px);
+  }
+  70% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scrollToTopPopOutInactive {
+  0% {
+    display: flex;
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(100px);
+    display: none;
+  }
+}
+
+@keyframes popupAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes popupCloseAnimation {
+  0% {
+    transform: translateY(0);
+    display: flex;
+  }
+  25% {
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes bottomNavSlide {
+  0% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bottomNavSlideDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px);
+    opacity: 0;
   }
 }
