@@ -19,7 +19,8 @@ const VideoPlayer = ({ title, thumbnail = "", url = "" }) => {
       // const data = await flixhq.home();
       // console.log(data);
     // })();
-  },[])
+  },[]);
+  
   return (
     <div id="custom-player-bg">
       {url ? (

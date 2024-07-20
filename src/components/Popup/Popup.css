@@ -14,7 +14,7 @@
   max-width: 400px;
   animation: popupAnimation .5s;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: var(--small-gap);
   z-index: 55;
 
@@ -37,12 +37,9 @@
 }
 
 .popup-full-message {
-  display: none;
+  display: flex;
   padding: var(--button-padding);
   background: var(--bg-color);
   border-radius: var(--button-radius);
   transition: all .5s;
-}
-.popup-fullf-message.open {
-  display: block;
 }

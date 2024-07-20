@@ -7,6 +7,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import "./HeroSlider.css";
 import "swiper/css";
+import "swiper/css/pagination";
 import { shuffleArray } from "../../config/util";
 import { roundUpNumber } from "../../config/config";
 
@@ -16,7 +17,8 @@ const HeroSlider = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [heroMovies, setHeroMovie] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [genres, setGenres] = useState([]);
+  const [movieGenres, setMovieGenres] = useState([]);
+  const [tvGenres, setTvGenres] = useState([]);
 
   const updateIndex = (pos) => {
     const currentSlide = currentIndex == heroMovies.length - 1 ? 0 : pos;
@@ -33,7 +35,7 @@ const HeroSlider = () => {
         });
 
         const movieData = movieResponse.data.results
-          .slice(0, 10)
+          .slice(0, 8)
           .map((movie) => (movie = { ...movie, type: "movie" }));
 
         const tvResponse = await tmdbAPI.getTvList(tvType.popular, {
@@ -41,22 +43,14 @@ const HeroSlider = () => {
         });
 
         const tvData = tvResponse.data.results
-          .slice(0, 10)
+          .slice(0, 8)
           .map((tv) => (tv = { ...tv, type: "tv" }));
 
         const tvGenresResponse = await tmdbAPI.getGenre("tv");
         const movieGenresResponse = await tmdbAPI.getGenre("movie");
 
-        const genresResponse = [
-          ...tvGenresResponse.data.genres.map(
-            (genre) => (genre = { ...genre, type: "tv" })
-          ),
-          ...movieGenresResponse.data.genres.map(
-            (genre) => (genre = { ...genre, type: "movie" })
-          ),
-        ];
-
-        setGenres(genresResponse);
+        setTvGenres(tvGenresResponse.data.genres);
+        setMovieGenres(movieGenresResponse.data.genres);
 
         setHeroMovie(shuffleArray([...heroMovies, ...movieData, ...tvData]));
       } catch (e) {
@@ -81,7 +75,7 @@ const HeroSlider = () => {
             delay: 8000,
             disableOnInteraction: false,
           }}
-          pagination={false}
+          pagination={{clickable: true}}
           navigation={false}
           modules={[Autoplay, Pagination, Navigation]}
           onRealIndexChange={(e) => {
@@ -95,7 +89,7 @@ const HeroSlider = () => {
                   <HeroSlide
                     data={movie}
                     animation={currentIndex === i}
-                    genres={genres}
+                    genres={movie?.type == "tv" ? tvGenres : movieGenres}
                   />
                 </SwiperSlide>
               );
@@ -128,7 +122,12 @@ const HeroSlider = () => {
   );
 };
 
-const HeroSlide = ({ shimmer = false, data, animation = false, genres }) => {
+const HeroSlide = ({
+  shimmer = false,
+  data,
+  animation = false,
+  genres = [],
+}) => {
   const navigate = useNavigate();
 
   const goToDetails = (id, type) => {
@@ -137,9 +136,7 @@ const HeroSlide = ({ shimmer = false, data, animation = false, genres }) => {
   };
 
   const getGenreName = (id) => {
-    genres.map((genre) => {
-      if (genre.type === type && genre.id === id) return genre.name;
-    });
+    return genres.filter((genre) => genre.id === id).map((genre) => genre.name);
   };
 
   return (
@@ -181,7 +178,7 @@ const HeroSlide = ({ shimmer = false, data, animation = false, genres }) => {
                     <i className="fa-solid fa-star warning-text small-icon"></i>
                     {roundUpNumber(1, data.vote_average)}
                   </span>
-                  {data.genre_ids.map((genreId, i) => {
+                  {data?.genre_ids.map((genreId, i) => {
                     return (
                       <span key={i} className="hero-data-rating-bg">
                         {getGenreName(genreId)}
@@ -199,7 +196,11 @@ const HeroSlide = ({ shimmer = false, data, animation = false, genres }) => {
                     {data.overview}
                   </h3>
                 )}
-                <button className="hero-buttons btn">
+                <button
+                  className={`hero-buttons pop-up-animation btn ${
+                    animation ? "active" : ""
+                  }`}
+                >
                   <h5>More details</h5>
                 </button>
               </div>

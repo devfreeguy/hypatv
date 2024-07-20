@@ -1,0 +1,5 @@
+.mseason-card {
+  margin: .2rem 0;
+  border-bottom: solid 2px var(--line-color);
+  padding: .5rem 0;
+}

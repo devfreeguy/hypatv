@@ -2,7 +2,7 @@ import tmdbAPI from "../config/api";
 import "../styles/Details.css";
 import "swiper/css";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import apiConfig from "../config/apiconfg";
 import dateConverter from "../config/dateConverter";
 import UserCard from "../components/UserCard/UserCard";
@@ -15,6 +15,9 @@ import { getData, updateData } from "../config/firebaseConfig";
 import DownloaderBtm from "../components/DownloaderBtm/DownloaderBtm";
 import SectionGroups from "../components/SectionGroups/SectionGroups";
 import CommentTile from "../components/Comments/CommentTile";
+import { roundUpNumber } from "../config/config";
+import EmptyState from "../components/EmptyState/EmptyState";
+import MiniSeasonCard from "../components/MiniSeasonCard/MiniSeasonCard";
 
 export let openMoreOption = false;
 
@@ -23,6 +26,7 @@ export const handleMenu = (choice = false) => {
 };
 
 const Details = () => {
+  const posterHeightRef = useRef(null);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const usersdata = JSON.parse(sessionStorage.getItem("usersdata"));
@@ -40,10 +44,13 @@ const Details = () => {
   const [showDownloaderBtm, setShowDownloaderBtm] = useState(false);
   const [savedData, setSavedData] = useState([]);
   const [date, setDate] = useState("");
+  const [posterHeight, setPosterHeight] = useState(0);
 
-  useEffect(() => {
-    // setId(location.state.data.id);
-  }, [pathname]);
+  useLayoutEffect(() => {
+    document.onreadystatechange = () => {
+      setPosterHeight(posterHeightRef.current.clientHeigth);
+    };
+  }, []);
 
   useEffect(() => {
     const getDetails = async () => {
@@ -117,27 +124,21 @@ const Details = () => {
         {/* New update */}
 
         <div id="details-main-bg">
-          <div
-            id="details-hero-bg"
-            style={{
-              backgroundImage: `url(
-                ${apiConfig.w500Image(
-                  data?.poster_path ? data?.poster_path : data?.backdrop_path
-                )}
-              )`,
-            }}
-          >
+          <div id="details-hero-bg">
             <div id="details-info-bg">
-              <div id="details-video-bg">
-                <VideoPlayer
-                  title={type === "tv" ? data.name : data.title}
-                  thumbnail={apiConfig.w500Image(
-                    data?.backdrop_path
-                      ? data?.backdrop_path
-                      : data?.poster_path
-                  )}
-                />
-              </div>
+              <img
+                ref={posterHeightRef}
+                className="thumbnail"
+                src={apiConfig.backdropImage(
+                  data?.backdrop_path ? data?.backdrop_path : data?.poster_path
+                )}
+              />
+              {/* <VideoPlayer
+                title={type === "tv" ? data.name : data.title}
+                thumbnail={apiConfig.backdropImage(
+                  data?.backdrop_path ? data?.backdrop_path : data?.poster_path
+                )}
+              /> */}
               <div id="details-info">
                 {/* Movie title / Tv series name */}
                 <h1 id="details-hero-data-title">
@@ -151,21 +152,20 @@ const Details = () => {
                         <i className="fa-solid fa-star warning-text"></i>
                         <h5 className="details-bullet-text">
                           {data.vote_average > 0
-                            ? data.vote_average
+                            ? roundUpNumber(1, data.vote_average)
                             : "No Rating"}
                         </h5>
                       </span>
                     </span>
                   )}
-                  {data.release_date ||
-                    (data.first_air_date && (
-                      <span className="details-bullets-holder">
-                        <span className="details-bullets">
-                          <i className="fa-regular fa-calendar-days blue-text"></i>
-                          <h5 className="details-bullet-text">{date}</h5>
-                        </span>
+                  {date && (
+                    <span className="details-bullets-holder">
+                      <span className="details-bullets">
+                        <i className="fa-regular fa-calendar-days blue-text"></i>
+                        <h5 className="details-bullet-text">{date}</h5>
                       </span>
-                    ))}
+                    </span>
+                  )}
                   {language && (
                     <span className="details-bullets-holder">
                       <span className="details-bullets">
@@ -180,30 +180,73 @@ const Details = () => {
                       </span>
                     </span>
                   )}
+                </span>
+
+                <div id="details-genre-cta-holder">
                   {/* Genres */}
-                </span>
-                <span id="details-genre-list">
-                  {genre?.map((genre) => {
-                    return (
-                      <button
-                        key={genre.id}
-                        className="relative-btn details-genre"
-                        onClick={() => {
-                          navigate(`/discover/${type}/genre/${genre.id}`, {
-                            state: { name: genre.name },
-                          });
-                        }}
-                      >
-                        {genre.name}
-                      </button>
-                    );
-                  })}
-                </span>
+                  <span id="details-genre-list">
+                    {genre?.map((genre) => {
+                      return (
+                        <button
+                          key={genre.id}
+                          className="relative-btn details-genre"
+                          onClick={() => {
+                            navigate(`/discover/${type}/genre/${genre.id}`, {
+                              state: { name: genre.name },
+                            });
+                          }}
+                        >
+                          {genre.name}
+                        </button>
+                      );
+                    })}
+                  </span>
+                </div>
               </div>
             </div>
+
+            <div className="hero-meta-bg">
+              {/*<h4 className="">{type === "tv" ? `Seasons` : `Trailer`}</h4>*/}
+              <div className="hero-meta-data">
+                <h3 className="underlined-text">Summary</h3>
+                <h4 className="normal-text">{data.overview}</h4>
+                {/*{type === "tv" ? (
+                  seasons?.length > 0 ? (
+                    seasons?.slice(0, 5)?.map((season, i) => {
+                      try {
+                        return <MiniSeasonCard key={i} data={season} />;
+                      } catch (error) {
+                        console.log(error);
+                      }
+                    })
+                  ) : (
+                    <EmptyState />
+                  )
+                ) : (
+                  trailers?.slice(0, 3).map((trailer, id) => {
+                    return (
+                      <TrailerCard
+                        fit={true}
+                        data={trailer}
+                        id={id}
+                        playTrailer={(pos) => {
+                          showTrailerPlayer(true, pos);
+                        }}
+                      />
+                    );
+                  })
+                )}*/}
+              </div>
+
+              {/* Action button */}
+              <button className="btn hero-action-btn">
+                <i className="fa-solid fa-play"></i> <span>Watch now</span>
+              </button>
+            </div>
+            {/*  */}
           </div>
           {/* Tv seasons */}
-          {seasons && (
+          {seasons?.length > 0 && (
             <div className="datails-container" id="details-main-seasons">
               <h4 className="underlined-text">Seasons</h4>
               <Swiper
@@ -225,13 +268,13 @@ const Details = () => {
               </Swiper>
             </div>
           )}
-          {/* Movie / Tv summary */}
+          {/* Movie / Tv summary
           {data.overview && (
             <div className="datails-container" id="details-main-summary">
               <h4 className="underlined-text">Summary</h4>
-              <h3 className="normal-text">{data.overview}</h3>
+              <h4 className="sub-text">{data.overview}</h4>
             </div>
-          )}
+          )} */}
           {/* Trailers */}
           {trailers.length > 0 && (
             <div className="datails-container" id="details-main-summary">
@@ -310,16 +353,21 @@ const Details = () => {
             </div>
           )}
           {/* Similar */}
-          <SectionGroups name={"Similar"} type={type} mode="similar" id={id} />
+          <SectionGroups
+            name={`Similar ${type === "movie" ? "movies" : "series"}`}
+            type={type}
+            mode="similar"
+            id={id}
+          />
         </div>
       </div>
 
       {/* Comments or review tab */}
-      <div id="details-review-bg">
+      {/* <div id="details-review-bg">
         <h3 id="details-review">Comments</h3>
         <CommentTile />
-        <CommentTile isReply={true} />
-      </div>
+        <CommentTile />
+      </div> */}
 
       {showTrailer && (
         <TrailerPlayer

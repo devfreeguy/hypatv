@@ -27,8 +27,8 @@ const ProfileInfo = () => {
     getUsesData();
   }, []);
 
-  const handleSubmit = async () => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (
       firstName &&

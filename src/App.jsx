@@ -31,7 +31,7 @@ function App() {
   const { pathname } = useLocation();
   const [showPrompt, setShowPrompt] = useState(false);
   const [isAtTheTop, setIsAtTheTop] = useState(true);
-  // const [navBarRedZone, setNavBarRedZone] = useState(false);
+  const [navBarRedZone, setNavBarRedZone] = useState(false);
   const [headerRedZone, setHeaderRedZone] = useState(false);
 
   useEffect(() => {
@@ -45,13 +45,13 @@ function App() {
       setShowPrompt(false);
     }
 
-    // setNavBarRedZone(
-    //   pathname.includes("/login") ||
-    //     pathname.includes("/signup") ||
-    //     pathname.includes("/more-info") ||
-    //     pathname.includes("/movie/details") ||
-    //     pathname.includes("/tv/details")
-    // );
+    setNavBarRedZone(
+      pathname.includes("/login") ||
+        pathname.includes("/signup") ||
+        pathname.includes("/more-info") ||
+        pathname.includes("/movie/details") ||
+        pathname.includes("/tv/details")
+    );
 
     setHeaderRedZone(
       pathname.includes("/login") ||
@@ -81,27 +81,28 @@ function App() {
   return (
     <>
       {showPrompt && <NoUserPrompt />}
-      {/* {pathname !== "/" && <CoverPhoto />} */}
       <Header />
-      <NavBar />
-      <main className={headerRedZone ? "active" : ""}>
-        <Suspense fallback={() => <SplashScreen />}>
-          <div id="main-bg">
+      {!navBarRedZone && <NavBar />}
+      <Suspense
+        fallback={() => {
+          return <SplashScreen />;
+        }}
+      >
+        <main className={headerRedZone ? "active" : ""}>
+          <div id="main-bg" className={navBarRedZone ? "nomargin" : ""}>
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/tv" element={<TvSeries />} />
               <Route path="/movie" element={<Movies />} />
-
               <Route path="/search" element={<Search />} />
               <Route path="/:type/search/:keyword" element={<Category />} />
-
               <Route path="/signup" element={<Auth />} />
               <Route path="/login" element={<Auth />} />
               <Route path="/more-info" element={<Auth />} />
               <Route path="/:type" element={<Category />} />
               <Route path="/discover" element={<Discover />} />
-              <Route path="/discover/movies" element={<Discover />} />
-              <Route path="/discover/tv" element={<Discover />} />
+              <Route path="/discover/movies" element={<Discover tab="movies" />} />
+              <Route path="/discover/tv" element={<Discover tab="tv" />} />
               <Route path="/discover/:type/genre/:id" element={<Discover />} />
               <Route path="/:type/:id" element={<Details />} />
               <Route path="/status/:statusType" element={<StatusPage />} />
@@ -109,14 +110,14 @@ function App() {
               <Route path="/docs/disclaimer" element={<Documents />} />
               <Route path="/docs/terms-of-service" element={<Documents />} />
             </Routes>
-            <Footer />
+            {!navBarRedZone && <Footer />}
           </div>
-        </Suspense>
-      </main>
+        </main>
+      </Suspense>
       <div
         id="back-to-top"
         onClick={scrollToTop}
-        className={!isAtTheTop && "active"}
+        className={!isAtTheTop ? "active" : ""}
       >
         <i className="fa-solid fa-angle-up"></i>
       </div>

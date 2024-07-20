@@ -1,6 +1,3 @@
-@import url(../../styles/variables.css);
-
-
 .action-card-bg {
   display: flex;
   position: fixed;
@@ -22,8 +19,13 @@
 }
 
 .action-card-close {
+  display: flex;
   position: absolute;
   margin: 1rem;
+  width: 25px;
+  height: 25px;
+  justify-content: center;
+  align-items: center;
 }
 
 #action-card-profile {

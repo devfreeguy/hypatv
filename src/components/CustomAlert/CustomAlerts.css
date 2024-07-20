@@ -1,10 +1,8 @@
-@import url(../../styles/variables.css);
-
 .custom-alert-bg {
   display: flex;
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: var(--light-dark-bg-color);
   backdrop-filter: blur(10px);
   z-index: 2000;
@@ -20,7 +18,7 @@
   border-radius: var(--button-radius);
   margin: 1rem;
   gap: calc(var(--small-gap) * 2);
-  max-width: 300px;
+  max-width: 350px;
   width: 100%;
 }
 
@@ -28,8 +26,10 @@
   display: flex;
   align-items: center;
   gap: var(--small-gap);
+  width: 100%;
 }
 
 .custom-dialog-btn {
   flex: 1;
+  width: 100%;
 }

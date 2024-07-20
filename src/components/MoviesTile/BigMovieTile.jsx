@@ -20,7 +20,7 @@ const BigMovieTile = ({ size, data }) => {
       <div id="movie-tile" className="movie-tile">
         <div id="movie-tile-main">
           <img
-            src={image ? apiConfig.w500Image(image) : placeholder}
+            src={image ? apiConfig.smallPosterImage(image) : placeholder}
             id="big-movie-tile-image"
             className={`${size} ${isActive ? "active" : ""}`}
           />

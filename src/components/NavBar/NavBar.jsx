@@ -111,48 +111,18 @@ const NavBar = () => {
                   className={`fa-solid ${e.iconName} medium-icon`}
                   id="nav-icon"
                 ></i>
-                <h5
-                  className={`nav-text single-line-text ${
+                <h6
+                  className={`nav-text single-line-text sub-text ${
                     toggle ? "active" : ""
                   }`}
                 >
                   {e.name}
-                </h5>
+                </h6>
               </span>
             </li>
           );
           // }
         })}
-
-        {/* {navItem.map((e, i) => {
-          if (e.type === "nav-shortcut") {
-            return (
-              <li key={i} className={"nav-item nav-shortcut"}>
-                <span
-                  onClick={() =>
-                    e.to ? pathname !== e.to && navigate(e.to) : null
-                  }
-                  className={`nav-shortcut nav-tile ${
-                    active === i ? "active" : ""
-                  }`}
-                >
-                  <i
-                    className={`fa-solid ${e.iconName} medium-icon`}
-                    id="nav-icon"
-                  ></i>
-                  <h5
-                    className={`nav-text single-line-text ${
-                      toggle ? "active" : ""
-                    }`}
-                    key={e.name}
-                  >
-                    {e.name}
-                  </h5>
-                </span>
-              </li>
-            );
-          }
-        })} */}
 
         <span className="weight nav-weight"></span>
 
@@ -164,11 +134,11 @@ const NavBar = () => {
               } medium-icon menu-icon`}
               id="nav-icon"
             ></i>
-            <h5
+            <h6
               className={`nav-text single-line-text ${toggle ? "active" : ""}`}
             >
-              {toggle ? "Close menu" : "More"}
-            </h5>
+              {toggle ? "Close menu" : "Menu"}
+            </h6>
           </span>
         </li>
       </div>

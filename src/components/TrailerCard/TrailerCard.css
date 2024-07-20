@@ -11,6 +11,10 @@
   border-radius: var(--button-radius);
 }
 
+.tcard-bg.fit {
+  width: 100% !important;
+}
+
 .tcard-bg:hover .tcard-img {
   transform: scale(1.1);
 }

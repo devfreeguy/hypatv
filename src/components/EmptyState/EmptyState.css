@@ -1,0 +1,14 @@
+.nothing-bg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.nothing-bg img {
+  width: 60%;
+  min-width: 90px;
+  aspect-ratio: 1/1;
+}

@@ -1,48 +1,33 @@
-const dateConverter = (date = '', individualType = "") => {
-
-  if(date){
-    const [year = '', month = '', day = ''] = date.split("-");
+const dateConverter = (date = "", individualType = "") => {
+  if (date !== "") {
+    const [year = 0, month = 0, day = 0] = date.split("-");
     if (individualType === "") {
-      return `${monthIdToText(month)} ${day}, ${year}`;
+      return `${monthIdToText[month.toString()]} ${day}, ${year}`;
     } else if (individualType === "month") {
-      return monthIdToText(month);
+      return monthIdToText[month.toString()];
     } else if (individualType === "day") {
       return day;
     } else if (individualType === "year") {
       return year;
     }
-  }else{
-    return '';
+  } else {
+    return "";
   }
-
 };
 
-function monthIdToText(id) {
-  if (id == 1) {
-    return "January";
-  } else if (id == 2) {
-    return "February";
-  } else if (id == 3) {
-    return "March";
-  } else if (id == 4) {
-    return "April";
-  } else if (id == 5) {
-    return "May";
-  } else if (id == 6) {
-    return "June";
-  } else if (id == 7) {
-    return "July";
-  } else if (id == 8) {
-    return "August";
-  } else if (id == 9) {
-    return "September";
-  } else if (id == 10) {
-    return "October";
-  } else if (id == 11) {
-    return "November";
-  } else if (id == 12) {
-    return "December";
-  }
-}
+const monthIdToText = {
+  "01": "January",
+  "02": "February",
+  "03": "March",
+  "04": "April",
+  "05": "May",
+  "06": "June",
+  "07": "July",
+  "08": "August",
+  "09": "September",
+  10: "October",
+  11: "November",
+  12: "December",
+};
 
 export default dateConverter;

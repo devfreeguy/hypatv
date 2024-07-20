@@ -1,9 +1,14 @@
-import React from 'react'
-import './TrailerCard.css'
+import React from "react";
+import "./TrailerCard.css";
 
-const TrailerCard = ({data, id, playTrailer}) => {
+const TrailerCard = ({ data, id, playTrailer, fit = false }) => {
   return (
-    <div className="tcard-bg" onClick={()=>{playTrailer(id)}}>
+    <div
+      className={`tcard-bg ${fit ? "fit" : ""}`}
+      onClick={() => {
+        playTrailer(id);
+      }}
+    >
       <img
         className="tcard-img"
         src={`http://img.youtube.com/vi/${data.key}/sddefault.jpg`}
@@ -15,6 +20,6 @@ const TrailerCard = ({data, id, playTrailer}) => {
       </div>
     </div>
   );
-}
+};
 
-export default TrailerCard
+export default TrailerCard;

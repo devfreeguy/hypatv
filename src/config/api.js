@@ -18,6 +18,7 @@ export const tvType = {
 };
 
 const tmdbAPI = {
+  // Data list
   getMoviesList: (type, params) => {
     const url = "movie/" + movieType[type];
     return dbClient.get(url, params);
@@ -30,6 +31,7 @@ const tmdbAPI = {
     const url = "trending/" + type + "/" + timeWindow;
     return dbClient.get(url, { params: {} });
   },
+  // Genre list
   getMoviesGenre: () => {
     const url = "genre/movie/list";
     return dbClient.get(url, { params: {} });
@@ -42,10 +44,12 @@ const tmdbAPI = {
     const url = 'genre/' + type + '/list';
     return dbClient.get(url, { params: {} });
   },
+  // Trailers
   getVideos: (category, id) => {
     const url = type[category] + "/" + id + "/videos";
     return dbClient.get(url, { params: {} });
   },
+  // Search
   search: (category, params) => {
     const url = "search/" + type[category];
     return dbClient.get(url, params);
@@ -54,18 +58,22 @@ const tmdbAPI = {
     const url = "search/multi";
     return dbClient.get(url, params);
   },
+  // Movie details
   details: (category, id, params) => {
     const url = type[category] + "/" + id;
     return dbClient.get(url, params ? params : { params: {} });
   },
+  // Cast and crew
   credits: (category, id) => {
     const url = type[category] + "/" + id + "/credits";
     return dbClient.get(url, { params: {} });
   },
+  // Similar movies
   similar: (category, id) => {
     const url = type[category] + "/" + id + "/similar";
     return dbClient.get(url, { params: {} });
   },
+  // Recommended movies
   discover: (path, params) => {
     // Path should either be "movie | tv | people"
     const url = "discover/" + path;

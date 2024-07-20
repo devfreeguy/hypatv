@@ -38,7 +38,8 @@ nav.active {
 
 /* Logo */
 #nav-logo {
-  width: calc(var(--sidebar-width) / 1.7);
+  margin-top: 1rem;
+  width: calc(var(--sidebar-width) / 2.2);
   height: var(--header-height);
   background: none;
 }
@@ -52,36 +53,37 @@ nav.active {
 
 .nav-tile {
   width: 100%;
+  height: 50px;
   display: flex;
   padding: 1rem;
   border-radius: var(--border-radius);
-  gap: 12px;
+  gap: 0 12px;
   cursor: pointer;
   transition: all 500ms;
   margin: 0.2rem 0;
   background: var(--dark-card-color);
   overflow: hidden;
-  justify-content: center;
   align-items: center;
-}
-
-.nav-tile.active {
-  justify-content: flex-start;
 }
 
 .nav-tile * {
   color: var(--white-color);
 }
 
+#nav-icon {
+  padding: 5px;
+}
+
 h5.nav-text {
-  color: var(--text-color);
-  display: none;
+  color: var(--sub-text-color);
+  display: flex;
   flex: 1;
   overflow: hidden;
+  visibility: hidden;
 }
 
 nav.active h5.nav-text {
-  display: inline-block;
+  visibility: visible;
 }
 
 .nav-tile:hover {
@@ -97,7 +99,6 @@ nav.active h5.nav-text {
 }
 
 @media screen and (max-width: 576px) {
-
   nav {
     position: fixed;
     width: 100%;
@@ -135,7 +136,7 @@ nav.active h5.nav-text {
   #nav-bg.active {
     width: 100%;
   }
-  
+
   #nav-logo {
     display: none;
   }
@@ -187,10 +188,6 @@ nav.active h5.nav-text {
 
   .nav-tile.active > * {
     color: var(--normal-color);
-  }
-
-  #nav-icon {
-    /* font-size: 13px; */
   }
 
   h5.nav-text {

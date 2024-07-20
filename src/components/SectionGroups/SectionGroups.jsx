@@ -7,6 +7,7 @@ import "swiper/css";
 import { useNavigate } from "react-router-dom";
 import { shuffleArray } from "../../config/util";
 import GridShimmer from "../Shimmer/GridShimmer";
+import SuspenseLoading from "../SuspenseLoading/SuspenseLoading";
 
 const SectionGroups = ({
   name = "",
@@ -14,7 +15,7 @@ const SectionGroups = ({
   category = "",
   mode = "normal",
   id = 0,
-  children
+  children,
 }) => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -85,44 +86,48 @@ const SectionGroups = ({
     navigate(`/${type}`);
   };
 
-  return (
-    <section
-      id="section-group-tile"
-      className={mode === "normal" ? "" : "card"}
-    >
-      <div id="section-group-header">
-        <h3>{name.trim()}</h3>
-        {mode == "normal" && (
-          <button
-            onClick={handleSeeMore}
-            className={`relative-btn ${mode === "relative" ? "card" : ""}`}
-          >
-            <i className="fa-solid fa-arrow-right"></i>
-          </button>
-        )}
-      </div>
-      <div id="section-group-main">
-        <Swiper grabCursor={true} spaceBetween={10} slidesPerView={"auto"}>
-          {data.length > 0 &&
-            data.map((itemData) => {
-              try {
-                return (
-                  <SwiperSlide key={itemData.id}>
-                    <MoviesTile data={itemData} type={type} from="groups" />
-                  </SwiperSlide>
-                );
-              } catch (error) {
-                console.log(error);
-              }
-            })}
-          {!data.length > 0 && shimmers}
-        </Swiper>
-      </div>
-      {children && <div className="section-children">
-        {children}
-      </div>}
-    </section>
-  );
+  if (data.length > 0) {
+    return (
+      <section
+        id="section-group-tile"
+        className={mode === "normal" ? "" : "card"}
+      >
+        <div id="section-group-header">
+          <h3>{name.trim()}</h3>
+          {mode == "normal" && (
+            <button
+              onClick={handleSeeMore}
+              className={`relative-btn ${mode === "relative" ? "card" : ""}`}
+            >
+              <i className="fa-solid fa-arrow-right"></i>
+            </button>
+          )}
+        </div>
+        <div id="section-group-main">
+          <Swiper grabCursor={true} spaceBetween={10} slidesPerView={"auto"}>
+            {data.length > 0 &&
+              data.map((itemData) => {
+                try {
+                  return (
+                    <SwiperSlide key={itemData.id}>
+                      <MoviesTile data={itemData} type={type} from="groups" />
+                    </SwiperSlide>
+                  );
+                } catch (error) {
+                  console.log(error);
+                }
+              })}
+            {!data.length > 0 && shimmers}
+          </Swiper>
+        </div>
+        {children && <div className="section-children">{children}</div>}
+      </section>
+    );
+  }else{
+    return (
+      <SuspenseLoading/>
+    )
+  }
 };
 
 export default SectionGroups;

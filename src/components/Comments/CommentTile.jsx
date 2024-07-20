@@ -16,7 +16,7 @@ const CommentTile = ({ isReply = false }) => {
       <div className="comment-tile-info-bg">
         <div className="comment-tile-card">
           <h6 className="user-comment-name">Name</h6>
-          <p clasaName="user-comment sub-text">
+          <p className="user-comment sub-text">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
             dicta.
           </p>

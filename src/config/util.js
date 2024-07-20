@@ -32,17 +32,25 @@ export const isNumeric = (num) =>
   (typeof num === "number" || (typeof num === "string" && num.trim() !== "")) &&
   !isNaN();
 
-export const getGenreById = async (type, id) => {
-  const response = await tmdbAPI.getGenre(type);
-  await response.data.genres.map((genre) => {
-    if (genre.id == id) {
-      console.log(genre.name);
-      return genre.name;
-    }
-  });
-};
+// export const getGenreName = (genres = [], id) => {
+//   try {
+//     for (let i = 0; i < genres.length; i++) {
+//       if (genres[i] === id) return genres[i].name;
+//     }
+//     // return genres.map((genre) => {
+//     //   if (genre.id === id) genre.name;
+//     // });
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
 
 export const filterOptions = {
   tv: ["Popular", "Top rated", "On the air"],
   movie: ["Popular", "Top rated", "Upcoming"],
 };
+
+// export const dateFormatter = (date) => {
+//   const newDate = new Date(date);
+
+// }

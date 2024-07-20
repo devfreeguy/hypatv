@@ -18,9 +18,9 @@ const MoviesTile = ({ data, type, from }) => {
 
   useEffect(() => {
     setImage(
-      apiConfig.w500Image(data?.poster_path)
-        ? apiConfig.w500Image(data?.poster_path)
-        : apiConfig.w500Image(data?.backdrop_path)
+      apiConfig.smallPosterImage(data?.poster_path)
+        ? apiConfig.smallPosterImage(data?.poster_path)
+        : apiConfig.smallPosterImage(data?.backdrop_path)
     );
   }, []);
 

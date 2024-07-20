@@ -62,14 +62,14 @@ img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background-image: url(../../public/images/placeholder.jpg);
+  background-image: url(/images/placeholder.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
 img:-moz-loading {
-  background-image: url(../../public/images/placeholder.jpg);
+  background-image: url(/images/placeholder.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -140,11 +140,16 @@ main.active {
   justify-content: space-between;
 }
 
+#main-bg.nomargin {
+  margin: 0;
+  width: 100%;
+}
+
 .main-action-bar {
   display: flex;
   place-items: center;
   position: sticky;
-  z-index: 50;
+  z-index: 20;
   padding: 1rem 2rem;
   width: 100%;
   background: var(--bg-color);
@@ -166,7 +171,8 @@ main.active {
   background: var(--primary-color);
   padding: var(--padding);
   border-radius: var(--border-radius);
-  margin: 5vw;
+  margin-bottom: 1rem;
+  margin-right: 2rem;
   left: auto;
   top: auto;
   bottom: 1rem;
@@ -175,7 +181,7 @@ main.active {
   animation: scrollToTopPopOutInactive 0.5s;
 
   @media screen and (max-width: 992px) {
-    bottom: 5rem;
+    margin-bottom: 4rem;
   }
 }
 
@@ -409,6 +415,7 @@ li {
 progress {
   appearance: none;
 }
+
 ::-webkit-progress-bar,
 ::-moz-progress-bar {
   border: none;
@@ -485,6 +492,7 @@ progress {
 .warning-text {
   color: rgb(255, 217, 0);
 }
+
 .blue-text {
   color: rgb(0, 132, 255);
 }
@@ -495,6 +503,7 @@ progress {
   width: auto;
   margin: 0.5rem 0;
 }
+
 .underlined-text::after {
   content: "";
   height: 4px;
@@ -526,9 +535,11 @@ progress {
   background-color: var(--primary-color);
   display: inline-block;
 }
-.btn:hover{
+
+.btn:hover {
   background: var(--normal-color);
 }
+
 .btn:hover,
 .secondary-btn:hover,
 .relative-btn:hover {
@@ -620,6 +631,7 @@ progress {
 }
 #loading {
   background-color: var(--light-dark-bg-color);
+  backdrop-filter: blur(10px);
 }
 
 #loading-container {
@@ -672,5 +684,4 @@ When working in react */
     margin: 0;
     width: 100%;
   }
-
 }

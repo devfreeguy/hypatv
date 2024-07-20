@@ -14,24 +14,51 @@ Table of context
 
 :root {
   /* Colors */
-  --primary-color: #ed1C24;
+
+  /* Green Theme */
+  --primary-color: #eb3339;
+  --accent-color: #e3f2fd;
+  --color-highlight: #798086;
+  --normal-color: #ee0f0f;
+  --bg-color: #0D1217;
+  --secondary-bg-color: #1B232D;
+  --card-color: #1c2531;
+  --text-color: #DFE5EC;
+  --sub-text-color: #949da7;
+  --line-color: #212D3B;
+  /* --dark-card-color: #101011; */
+
+  /* Red Theme */
+  /* --primary-color: #ed1C24;
   --accent-color: #e3f2fd;
   --color-highlight: #798086;
   --normal-color: #f54242;
   --bg-color: #0b0b0c;
   --secondary-bg-color: #141416;
   --card-color: #242428;
-  --dark-card-color: #101011;
-  --white-color: #ebebeb;
-  --text-color: #d4c6c6;
-  --sub-text-color: #b3bcca;
+  --text-color: #ccd3dd;
+  --sub-text-color: #b5bcc7;
   --line-color: #423f3f;
+  --dark-card-color: #101011; */
+
+  /* Other colors */
+  --white-color: #ebebeb;
   --sub-line-color: #222121;
   --warning-color: #ffd900;
   --warning-bg-color: rgb(61, 42, 0);
   --filter-tab-bg-color: rgba(88, 115, 255, 0.3);
   --light-dark-bg-color: rgba(0, 0, 0, 0.7);
   --darkGradientOverlay: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.644), black);
+
+  --swiper-pagination-color: var(--primary-color);
+  --swiper-pagination-bullet-size: 8px;
+  --swiper-pagination-bullet-width: 8px;
+  --swiper-pagination-bullet-height: 8px;
+  --swiper-pagination-bullet-inactive-color: var(--line-color);
+  --swiper-pagination-bullet-inactive-opacity: 0.9;
+  --swiper-pagination-bullet-opacity: 1;
+  --swiper-pagination-bullet-horizontal-gap: 4px;
+  --swiper-pagination-bullet-vertical-gap: 6px;
 
   /* Transitions */
   --slower-transformer: all 5s ease-in-out;
@@ -90,8 +117,8 @@ Table of context
 
   /* Custom sizes */
   --header-height: clamp(4.5rem, 10vw, 5.5rem);
-  --sidebar-width: 90px;
-  --open-sidebar-width: 250px;
+  --sidebar-width: 100px;
+  --open-sidebar-width: 230px;
 }
 
 @media screen and (max-width: 768px) {
