@@ -15,7 +15,7 @@ const fetchFiles = async (query) => {
 -- Plan --
  - Fetch files from backend
    - Then go through the list by filtering the
-     list with just the:
+     list by just the:
      - name
      - name and year
      - name, year, season and episode
